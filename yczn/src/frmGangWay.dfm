@@ -1,6 +1,6 @@
 object frmMainGangWay: TfrmMainGangWay
-  Left = 267
-  Top = 190
+  Left = 246
+  Top = 136
   Width = 870
   Height = 500
   Caption = #22270#20070#39302#36890#36947#26426#20986#20837#35760#24405#26597#35810#24037#20855
@@ -125,11 +125,12 @@ object frmMainGangWay: TfrmMainGangWay
       Text = '-'
       Items.Strings = (
         '-'
-        '172.18.10.30'
-        '172.18.10.31'
-        '172.18.10.32'
-        '172.18.10.33'
-        '172.18.10.34')
+        '59310'
+        '59332'
+        '59333'
+        '59357'
+        '59373'
+        '59469')
       ItemIndex = 0
     end
     object edtName: TRzEdit
@@ -158,6 +159,14 @@ object frmMainGangWay: TfrmMainGangWay
       TabOrder = 6
       OnClick = btnExportClick
       Kind = bkRetry
+    end
+    object Memo1: TMemo
+      Left = 480
+      Top = 24
+      Width = 185
+      Height = 57
+      TabOrder = 7
+      Visible = False
     end
   end
   object OraSession1: TOraSession

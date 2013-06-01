@@ -26,6 +26,7 @@ type
         edtName: TRzEdit;
         btnReport: TBitBtn;
         btnExport: TBitBtn;
+        Memo1: TMemo;
         procedure FormCreate(Sender: TObject);
         procedure btnQueryClick(Sender: TObject);
         procedure btnExportClick(Sender: TObject);
@@ -90,10 +91,13 @@ end;
 
 procedure TfrmMainGangWay.btnQueryClick(Sender: TObject);
 begin
+    {
     with TFromWaitThread.Create(getList, '正在查询，请稍后...') do begin
         FreeOnTerminate := True;
         Resume;
     end;
+    }
+    getList();
 end;
 
 
@@ -110,15 +114,15 @@ begin
         ' a.custname as 姓名, ' +
         ' a.transmark as 事件代码, ' +
         ' b.dictcaption as 说明 ' +
-        ' from t_doordtl a left join v_dictionary b on b.dicttype=86 and a.transmark=b.dictval ' +
+        ' from ykt_cur.t_doordtl a left join ykt_cur.v_dictionary b on b.dicttype=86 and a.transmark=b.dictval ' +
         ' where 1=1 ';
 
     if (frmMainGangWay.dtBegin.EditText <> '') then begin
-        sSql := sSql + ' and transdate >= ''' + frmMainGangWay.dtBegin.EditText + '''';
+        sSql := sSql + ' and transdate >= ''' + StringReplace(frmMainGangWay.dtBegin.EditText, '-', '', [rfReplaceAll]) + '''';
     end;
 
     if (frmMainGangWay.dtEnd.EditText <> '') then begin
-        sSql := sSql + ' and transdate <= ''' + frmMainGangWay.dtBegin.EditText + '''';
+        sSql := sSql + ' and transdate <= ''' + StringReplace(frmMainGangWay.dtEnd.EditText, '-', '', [rfReplaceAll]) + '''';
     end;
 
 
@@ -129,6 +133,9 @@ begin
     if (frmMainGangWay.edtName.Text <> '') then begin
         sSql := sSql + ' and custname = ''' + frmMainGangWay.edtName.Text + '''';
     end;
+
+    frmMainGangWay.memo1.Lines.Clear;
+    frmMainGangWay.memo1.Lines.Add(sSql);
     with frmMainGangWay.OraQuery1 do begin
         close;
         SQL.Clear;
@@ -136,7 +143,7 @@ begin
         open;
         frmMainGangWay.StatusBar1.Panels.Items[3].Text := '记录数：' + IntToStr(RecordCount);
     end;
-    frmMainGangWay.FixDBGridColumnWidth(frmMainGangWay.gridResult);
+    //frmMainGangWay.FixDBGridColumnWidth(frmMainGangWay.gridResult);
 end;
 
 
@@ -153,26 +160,28 @@ begin
         ' a.custname as 姓名, ' +
         ' a.transmark as 事件代码, ' +
         ' b.dictcaption as 说明 ' +
-        ' from t_doordtl a left join v_dictionary b on b.dicttype=86 and a.transmark=b.dictval ' +
+        ' from ykt_cur.t_doordtl a left join ykt_cur.v_dictionary b on b.dicttype=86 and a.transmark=b.dictval ' +
         ' where 1=1 ';
 
     if (frmMainGangWay.dtBegin.EditText <> '') then begin
-        sSql := sSql + ' and transdate >= ''' + frmMainGangWay.dtBegin.EditText + '''';
+        sSql := sSql + ' and transdate >= ''' + StringReplace(frmMainGangWay.dtBegin.EditText, '-', '', [rfReplaceAll]) + '''';
     end;
 
     if (frmMainGangWay.dtEnd.EditText <> '') then begin
-        sSql := sSql + ' and transdate <= ''' + frmMainGangWay.dtBegin.EditText + '''';
+        sSql := sSql + ' and transdate <= ''' + StringReplace(frmMainGangWay.dtEnd.EditText, '-', '', [rfReplaceAll]) + '''';
     end;
 
 
     if (frmMainGangWay.cbDev.Text <> '-') then begin
         sSql := sSql + ' and devphyid = ''' + frmMainGangWay.cbDev.Text + '''';
+    end
+    else begin
+        sSql := sSql + ' and devphyid in (''59310'',''59332'',''59333'',''59357'',''59373'',''59469'' )';
     end;
 
     if (frmMainGangWay.edtName.Text <> '') then begin
         sSql := sSql + ' and custname = ''' + frmMainGangWay.edtName.Text + '''';
     end;
-    //frmMainGangWay.Memo1.Lines.add(sSql);
 
     with frmMainGangWay.OraQuery1 do begin
         close;
@@ -185,7 +194,7 @@ begin
         frmMainGangWay.StatusBar1.Panels.Items[3].Text := '记录数：' + IntToStr(RecordCount);
     end;
 
-    frmMainGangWay.FixDBGridColumnWidth(frmMainGangWay.gridResult);
+    //frmMainGangWay.FixDBGridColumnWidth(frmMainGangWay.gridResult);
 end;
 
 procedure TfrmMainGangWay.btnExportClick(Sender: TObject);
@@ -219,10 +228,13 @@ end;
 
 procedure TfrmMainGangWay.btnReportClick(Sender: TObject);
 begin
+    {
     with TFromWaitThread.Create(getReport, '正在统计，请稍后...') do begin
         FreeOnTerminate := True;
         Resume;
     end;
+    }
+    getReport();
 end;
 
 
