@@ -113,8 +113,17 @@ begin
         ' a.stuempno as 学工号, ' +
         ' a.custname as 姓名, ' +
         ' a.transmark as 事件代码, ' +
-        ' b.dictcaption as 说明 ' +
+        ' b.dictcaption as 说明, ' +
+        ' t1.deptname as 部门或学院, ' +
+        ' t1.classname as 班级, ' +
+        ' t1.custtypename as 类别 ' +
         ' from ykt_cur.t_doordtl a left join ykt_cur.v_dictionary b on b.dicttype=86 and a.transmark=b.dictval ' +
+        ' left join ( ' +
+        '   select a.*,b.custtypename,c.feename,d.deptname from t_customer a ' +
+        ' left join t_custtype b on a.custtype=b.custtype ' +
+        ' left join t_feetype c on a.feetype=c.feetype ' +
+        ' left join t_dept d on a.deptcode=d.deptcode ' +
+        '   ) t1 on a.stuempno=t1.stuempno ' +
         ' where 1=1 ';
 
     if (frmMainGangWay.dtBegin.EditText <> '') then begin
