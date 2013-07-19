@@ -1,0 +1,75 @@
+===========================================
+ TeeChart Pro 6.01 VCL / CLX version
+    Copyright (c) 1995-2003
+       by David Berneda
+      All Rights Reserved.
+
+Steema Software SL
+http://www.steema.com
+email: info@steema.com
+       support@steema.com
+
+Release 6.01
+============
+
+Fixed bugs:
+
+- Fixed series editor problem when
+  changing custom axis "Horizontal" property.
+
+- Fixed AV when drawing gradient filled
+  annotation callout pointers in 3D mode.
+
+- Fixed wrong series drawing order when
+  Depth axis is "Inverted".
+
+- Fixed TRotateTool editor problem,
+  wrong setting of mouse button property.
+
+- Fixed TRotateTool bug when using Outline,
+  in 3D Orthogonal mode.
+
+- Fixed problems when setting TeeDefs.inc file
+  defines for "single" and "extended" value defaults.
+
+- Fixed display using "Large fonts" of Gradient
+  and Shadow editor dialogs.
+
+- Fixed compilation for Borland Kylix 3 and Open Edition
+
+- Fixed AV using NearestTool and clearing a Series.
+
+- Fixed naming problem of TeeFunction components at 
+  design-time under Delphi 4,5 and BCB 4,5.
+
+- Minor fixes for language translation units.
+
+- Fixed Line series wrong color display when 
+  ColorEachLine=False and 3D mode.
+
+- Several fixes for CLX/Linux editor dialogs.
+
+- Fixed Area series in "Stairs" mode and Transparency.
+
+- Some speed improvements in Canvas objects.
+
+
+Changes:
+--------
+
+* TCLVFunction renamed property:
+   From "Acumulate" to "Accumulate" (wrong spelling)
+
+
+
+What's New in version 6 ?
+=========================
+
+For an updated list of changes, please follow this link:
+
+http://www.steema.com/support/teechart/6/WhatsNew/WhatsNew.htm
+
+===========================================
+http://www.steema.com
+email: support@steema.com
+-------------------------------------------

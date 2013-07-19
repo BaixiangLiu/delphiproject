@@ -1,0 +1,105 @@
+object BrushDialog: TBrushDialog
+  Left = 351
+  Top = 326
+  ActiveControl = LStyle
+  AutoScroll = False
+  BorderIcons = [biSystemMenu]
+  Caption = 'Pattern Color Editor'
+  ClientHeight = 158
+  ClientWidth = 325
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Button2: TButton
+    Left = 243
+    Top = 3
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object BColor: TButtonColor
+    Left = 148
+    Top = 3
+    HelpContext = 1490
+    Caption = '&Color...'
+    TabOrder = 0
+  end
+  object Button3: TButton
+    Left = 243
+    Top = 40
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+    OnClick = Button3Click
+  end
+  object GroupBox2: TGroupBox
+    Left = 139
+    Top = 40
+    Width = 92
+    Height = 113
+    Caption = 'Image:'
+    TabOrder = 3
+    object Image1: TImage
+      Left = 13
+      Top = 56
+      Width = 64
+      Height = 48
+      Stretch = True
+    end
+    object Button1: TButton
+      Left = 8
+      Top = 21
+      Width = 75
+      Height = 25
+      HelpContext = 1376
+      Caption = '&Image...'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+  end
+  object LStyle: TListBox
+    Left = 3
+    Top = 3
+    Width = 129
+    Height = 149
+    HelpContext = 1490
+    Style = lbOwnerDrawFixed
+    ItemHeight = 16
+    Items.Strings = (
+      'Solid'
+      'None'
+      'Horizontal'
+      'Vertical'
+      'Diagonal'
+      'Back Diagonal'
+      'Cross'
+      'Diagonal Cross'
+      'Fill 80%'
+      'Fill 60%'
+      'Fill 40%'
+      'Fill 20%'
+      'Fill 10%'
+      'Zig zag'
+      'Vertical small'
+      'Horiz. small'
+      'Diag. small'
+      'Back Diag. small'
+      'Cross small'
+      'Diag. Cross small')
+    TabOrder = 4
+    OnClick = LStyleClick
+    OnDrawItem = LStyleDrawItem
+  end
+end

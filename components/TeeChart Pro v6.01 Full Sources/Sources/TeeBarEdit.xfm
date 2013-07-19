@@ -1,0 +1,220 @@
+object BarSeriesEditor: TBarSeriesEditor
+  Left = 213
+  Top = 163
+  ActiveControl = CBBarStyle
+  AutoScroll = False
+  ClientHeight = 180
+  ClientWidth = 313
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 196
+    Top = 44
+    Width = 61
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '% Bar &Width:'
+    FocusControl = SEBarwidth
+  end
+  object LStyle: TLabel
+    Left = 13
+    Top = 10
+    Width = 26
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'St&yle:'
+    FocusControl = CBBarStyle
+  end
+  object Label3: TLabel
+    Left = 196
+    Top = 72
+    Width = 61
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '% Bar O&ffset:'
+    FocusControl = SEBarOffset
+  end
+  object LBevel: TLabel
+    Left = 30
+    Top = 140
+    Width = 51
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Be&vel size:'
+    FocusControl = EBevel
+  end
+  object SEBarwidth: TEdit
+    Left = 260
+    Top = 40
+    Width = 32
+    Height = 21
+    HelpContext = 98
+    TabOrder = 3
+    Text = '1'
+    OnChange = SEBarwidthChange
+  end
+  object CBBarStyle: TComboFlat
+    Left = 42
+    Top = 6
+    Width = 97
+    HelpContext = 96
+    TabOrder = 0
+    OnChange = CBBarStyleChange
+    Items.Strings = (
+      'Rectangle'
+      'Pyramid'
+      'Invert. Pyramid'
+      'Cylinder'
+      'Ellipse'
+      'Arrow'
+      'Rect. Gradient'
+      'Cone'
+      'Bevel')
+  end
+  object BBarBrush: TButton
+    Left = 232
+    Top = 4
+    Width = 75
+    Height = 25
+    HelpContext = 93
+    Caption = '&Pattern...'
+    TabOrder = 2
+    OnClick = BBarBrushClick
+  end
+  object SEBarOffset: TEdit
+    Left = 260
+    Top = 68
+    Width = 32
+    Height = 21
+    HelpContext = 307
+    TabOrder = 5
+    Text = '0'
+    OnChange = SEBarOffsetChange
+  end
+  object GroupBox1: TGroupBox
+    Left = 144
+    Top = 100
+    Width = 161
+    Height = 73
+    TabOrder = 7
+    object CBDarkBar: TCheckBox
+      Left = 8
+      Top = 12
+      Width = 150
+      Height = 17
+      HelpContext = 176
+      Caption = '&Dark Bar 3D Sides'
+      TabOrder = 0
+      OnClick = CBDarkBarClick
+    end
+    object CBBarSideMargins: TCheckBox
+      Left = 8
+      Top = 32
+      Width = 150
+      Height = 17
+      HelpContext = 435
+      Caption = 'Bar S&ide Margins'
+      TabOrder = 1
+      OnClick = CBBarSideMarginsClick
+    end
+    object CBMarksAutoPosition: TCheckBox
+      Left = 8
+      Top = 52
+      Width = 150
+      Height = 17
+      HelpContext = 78
+      Caption = '&Auto Mark Position'
+      TabOrder = 2
+      OnClick = CBMarksAutoPositionClick
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 28
+    Top = 30
+    Width = 109
+    Height = 65
+    TabOrder = 9
+    object CBColorEach: TCheckBox
+      Left = 8
+      Top = 12
+      Width = 96
+      Height = 17
+      HelpContext = 164
+      Caption = 'Color &Each'
+      TabOrder = 0
+      OnClick = CBColorEachClick
+    end
+    object BBarColor: TButtonColor
+      Left = 8
+      Top = 32
+      HelpContext = 421
+      Caption = '&Color...'
+      TabOrder = 1
+    end
+  end
+  object UDBarWidth: TUpDown
+    Left = 292
+    Top = 40
+    Width = 15
+    Height = 21
+    HelpContext = 98
+    Associate = SEBarwidth
+    Min = 1
+    Increment = 5
+    Position = 1
+    TabOrder = 4
+  end
+  object UDBarOffset: TUpDown
+    Left = 292
+    Top = 68
+    Width = 15
+    Height = 21
+    HelpContext = 307
+    Associate = SEBarOffset
+    Min = -100
+    Increment = 5
+    TabOrder = 6
+  end
+  object BGradient: TButton
+    Left = 45
+    Top = 104
+    Width = 75
+    Height = 25
+    HelpContext = 1372
+    Caption = '&Gradient...'
+    TabOrder = 8
+    OnClick = BGradientClick
+  end
+  object BBarPen: TButtonPen
+    Left = 149
+    Top = 4
+    HelpContext = 95
+    Caption = '&Border...'
+    TabOrder = 1
+  end
+  object EBevel: TEdit
+    Left = 84
+    Top = 136
+    Width = 32
+    Height = 21
+    HelpContext = 98
+    TabOrder = 10
+    Text = '1'
+    OnChange = EBevelChange
+  end
+  object UDBevel: TUpDown
+    Left = 116
+    Top = 136
+    Width = 15
+    Height = 21
+    HelpContext = 98
+    Associate = EBevel
+    Position = 1
+    TabOrder = 11
+  end
+end

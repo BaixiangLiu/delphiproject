@@ -1,0 +1,45 @@
+package TeeImage64;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $43200000}
+{$DESCRIPTION 'TeeChart Pro Graphic Exporting formats'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl40,
+  vcljpg40,
+  TeeUI64,
+  Tee64;
+
+contains
+  TeeJPEG in 'TeeJPEG.pas',
+  TeeGIF in 'TeeGIF.pas',
+  TeePNG in 'TeePNG.pas',
+  GIFImage in 'GIFImage.pas',
+  TeePCX in 'teepcx.pas' {PCXOptions},
+  TeeVMLCanvas in 'TeeVMLCanvas.pas',
+  TeePDFCanvas in 'TeePDFCanvas.pas',
+  TeePSCanvas in 'TeePSCanvas.pas',
+  PCX in 'pcx.pas';
+
+end.

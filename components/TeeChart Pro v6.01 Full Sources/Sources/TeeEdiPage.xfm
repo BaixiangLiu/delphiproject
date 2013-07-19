@@ -1,0 +1,92 @@
+object FormTeePage: TFormTeePage
+  Left = 477
+  Top = 254
+  ActiveControl = SEPointsPerPage
+  AutoScroll = False
+  BorderIcons = [biSystemMenu]
+  ClientHeight = 175
+  ClientWidth = 378
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object L17: TLabel
+    Left = 46
+    Top = 19
+    Width = 112
+    Height = 22
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'P&oints per Page:'
+    FocusControl = SEPointsPerPage
+  end
+  object LabelPages: TLabel
+    Left = 144
+    Top = 89
+    Width = 77
+    Height = 16
+    Alignment = taCenter
+    AutoSize = False
+  end
+  object SEPointsPerPage: TEdit
+    Left = 164
+    Top = 14
+    Width = 37
+    Height = 21
+    HelpContext = 283
+    TabOrder = 0
+    Text = '0'
+    OnChange = SEPointsPerPageChange
+  end
+  object CBScaleLast: TCheckBox
+    Left = 228
+    Top = 17
+    Width = 143
+    Height = 17
+    HelpContext = 416
+    Caption = '&Scale Last Page'
+    TabOrder = 1
+    OnClick = CBScaleLastClick
+  end
+  object UDPointsPerPage: TUpDown
+    Left = 201
+    Top = 14
+    Width = 15
+    Height = 21
+    HelpContext = 283
+    Associate = SEPointsPerPage
+    Max = 32000
+    TabOrder = 2
+  end
+  object CBPageLegend: TCheckBox
+    Left = 112
+    Top = 48
+    Width = 153
+    Height = 17
+    HelpContext = 344
+    Caption = '&Current page Legend'
+    TabOrder = 3
+    OnClick = CBPageLegendClick
+  end
+  object ChartPageNavigator1: TChartPageNavigator
+    Left = 64
+    Top = 112
+    Width = 240
+    Height = 25
+    HelpContext = 1488
+    TabOrder = 4
+    OnButtonClicked = ChartPageNavigator1ButtonClicked
+  end
+  object CBPageNum: TCheckBox
+    Left = 112
+    Top = 152
+    Width = 161
+    Height = 17
+    HelpContext = 1693
+    Caption = 'Show &Page Number'
+    TabOrder = 5
+    OnClick = CBPageNumClick
+  end
+end

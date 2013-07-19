@@ -1,0 +1,54 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe -Q $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = Tee66.bpl TeeUI66.bpl TeeDB66.bpl DclTee66.bpl TeePro66.bpl \
+  TeeImage66.bpl TeeLanguage66.bpl DCLTeePro66.bpl TeeGL66.bpl DclTGL66.bpl \
+  TeeQR66.bpl DCLTQR66.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Tee66.bpl: Tee66.dpk
+  $(DCC)
+
+TeeUI66.bpl: TeeUI66.dpk
+  $(DCC)
+
+TeeDB66.bpl: TeeDB66.dpk
+  $(DCC)
+
+DclTee66.bpl: DclTee66.dpk
+  $(DCC)
+
+TeeQR66.bpl: TeeQR66.dpk
+  $(DCC)
+
+DCLTQR66.bpl: DCLTQR66.dpk
+  $(DCC)
+
+TeePro66.bpl: TeePro66.dpk
+  $(DCC)
+
+TeeGL66.bpl: TeeGL66.dpk
+  $(DCC)
+
+TeeLanguage66.bpl: TeeLanguage66.dpk
+  $(DCC)
+
+DCLTeePro66.bpl: DCLTeePro66.dpk
+  $(DCC)
+
+DclTGL66.bpl: DclTGL66.dpk
+  $(DCC)
+
+TeeImage66.bpl: TeeImage66.dpk
+  $(DCC)
+

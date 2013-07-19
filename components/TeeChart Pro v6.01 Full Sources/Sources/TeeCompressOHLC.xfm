@@ -1,0 +1,69 @@
+inherited CompressFuncEditor: TCompressFuncEditor
+  Left = 312
+  Top = 257
+  ClientHeight = 95
+  ClientWidth = 252
+  Position = poDefault
+  PixelsPerInch = 96
+  TextHeight = 13
+  object CBPeriod: TComboFlat
+    Left = 127
+    Top = 7
+    Width = 108
+    HelpContext = 1815
+    TabOrder = 0
+    OnChange = CBPeriodChange
+    OnClick = CBPeriodClick
+    Items.Strings = (
+      'Daily (none)'
+      'Weekly'
+      'Monthly'
+      'Bi-Monthly'
+      'Quarterly'
+      'Yearly')
+  end
+  object RadioButton1: TRadioButton
+    Left = 7
+    Top = 9
+    Width = 113
+    Height = 17
+    HelpContext = 1815
+    Caption = '&Datetime period:'
+    Checked = True
+    TabOrder = 1
+    TabStop = True
+    OnClick = RadioButton1Click
+  end
+  object ENum: TEdit
+    Left = 127
+    Top = 37
+    Width = 65
+    Height = 21
+    HelpContext = 382
+    TabOrder = 2
+    Text = '1'
+    OnChange = ENumChange
+    OnClick = ENumClick
+  end
+  object RadioButton2: TRadioButton
+    Left = 7
+    Top = 40
+    Width = 113
+    Height = 17
+    HelpContext = 382
+    Caption = '&Number of points:'
+    TabOrder = 3
+    OnClick = RadioButton2Click
+  end
+  object UpDown1: TUpDown
+    Left = 192
+    Top = 37
+    Width = 15
+    Height = 21
+    HelpContext = 382
+    Associate = ENum
+    Max = 32767
+    Position = 1
+    TabOrder = 4
+  end
+end

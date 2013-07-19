@@ -1,0 +1,55 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe -DCLX $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = Tee67clx.bpl TeeUI67clx.bpl TeeDB67clx.bpl DclTee67clx.bpl \
+  TeePro67clx.bpl TeeLanguage67Clx.bpl DclTeePro67clx.bpl TeeGL67clx.bpl \
+  DclTGL67clx.bpl TeeImage67clx.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Tee67clx.bpl: Tee67clx.dpk
+  $(DCC)
+
+TeeUI67clx.bpl: TeeUI67clx.dpk
+  $(DCC)
+
+TeeDB67clx.bpl: TeeDB67clx.dpk
+  $(DCC)
+
+DclTee67clx.bpl: DclTee67clx.dpk
+  $(DCC)
+
+TeeQR67clx.bpl: TeeQR67clx.dpk
+  $(DCC)
+
+DclTQR67clx.bpl: DclTQR67clx.dpk
+  $(DCC)
+
+TeePro67clx.bpl: TeePro67clx.dpk
+  $(DCC)
+
+TeeGL67clx.bpl: TeeGL67clx.dpk
+  $(DCC)
+
+TeeLanguage67Clx.bpl: TeeLanguage67Clx.dpk
+  $(DCC)
+
+DclTeePro67clx.bpl: DclTeePro67clx.dpk
+  $(DCC)
+
+DclTGL67clx.bpl: DclTGL67clx.dpk
+  $(DCC)
+
+TeeImage67clx.bpl: TeeImage67clx.dpk
+  $(DCC)
+
+

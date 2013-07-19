@@ -1,0 +1,120 @@
+===========================
+TeeChart Pro v6.01 VCL
+100% Full Source Code
+
+Steema Software SL
+
+http://www.steema.com
+info@steema.com
+---------------------------
+
+Thank You for Registering TeeChart Pro Source code.
+
+The source code can be modified or expanded
+for your own compiled applications. You can not
+resell or redistribute in any way this source code
+as it is or modified.
+
+See the License.txt document for complete licensing
+and disclaimer issues.
+
+
+Recompiling Packages:
+----------------------
+
+Kylix:
+------
+
+Please follow the installation guidelines found
+at Kylix.txt file.
+
+Delphi / C++ Builder:
+---------------------
+
+In Delphi and C++ Builder you can recompile the
+TeeChart Pro packages opening the
+appropiate Project Group File (*.bpg)
+
+Delphi 7: Tee6D7.bpg
+Delphi 6: Tee6D6.bpg
+Delphi 5: Tee6D5.bpg
+Delphi 4: Tee6D4.bpg
+
+C++ Builder 6: Tee6BCB6.bpg
+C++ Builder 5: Tee6BCB5.bpg
+C++ Builder 4: Tee6BCB4.bpg
+
+Double-click the first package ( Tee67 ) and select
+"Project -> Build All packages" to recompile all packages.
+
+Please remove old package files and close all projects 
+before recompiling.
+
+Destination of runtime packages:
+--------------------------------
+
+\Windows\System (\WinNT\System32) :
+
+Teexx.bpl
+TeeDBxx.bpl
+TeeUIxx.bpl
+TeeGLxx.bpl
+TeeQRxx.bpl
+TeeProxx.bpl
+TeeImagexx.bpl
+TeeLanguagexx.bpl
+
+
+Installation of packages:
+--------------------------
+
+Under Delphi / C++ Builder IDE, select
+Component->Install Packages.
+
+Make sure older TeeChart packages are
+removed from the package list.
+
+Select and Add the following design-time
+packages:
+
+DCLTeexx.bpl
+DCLTQRxx.bpl
+DCLTeeProxx.bpl
+DCLTGLxx.bpl
+
+and:
+
+\Windows\System\TeeImagexx.bpl
+
+
+Installation errors:
+---------------------
+
+Problems when installing packages in Delphi
+/ C++ Builder arise when old or duplicate 
+*.bpl (*.dpl) files are still located in the 
+system path (\Windows\System or \WinNT\System32).
+
+Other causes are:
+
+-Improper modification of source code.
+-Old or duplicate *.DCP or *.DCU or *.OBJ files.
+
+
+Modifications:
+--------------
+
+If you modify TeeChart Pro source code or fix a bug,
+you can email us this info so we can apply the same 
+changes for next coming upgrades if they can benefit to 
+other programmers.
+
+Support:
+--------
+
+Please direct your questions to supportsource@steema.com
+-------------------------------------------------------------
+
+Thanks for TeeCharting !
+Steema Software
+www.steema.com

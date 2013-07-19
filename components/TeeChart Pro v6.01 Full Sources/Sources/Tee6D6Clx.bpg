@@ -1,0 +1,53 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe -DCLX $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = Teeclx56.bpl TeeUIclx56.bpl TeeDBclx56.bpl DclTeeclx56.bpl TeeProclx56.bpl \
+  TeeLanguageClx56.bpl DclTeeProclx56.bpl TeeGLclx56.bpl DclTGLclx56.bpl TeeImageclx56.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Teeclx56.bpl: Teeclx.dpk
+  $(DCC)
+
+TeeUIclx56.bpl: TeeUIclx.dpk
+  $(DCC)
+
+TeeDBclx56.bpl: TeeDBclx.dpk
+  $(DCC)
+
+DclTeeclx56.bpl: DclTeeclx.dpk
+  $(DCC)
+
+TeeQRclx56.bpl: TeeQRclx.dpk
+  $(DCC)
+
+DclTQRclx56.bpl: DclTQRclx.dpk
+  $(DCC)
+
+TeeProclx56.bpl: TeeProclx.dpk
+  $(DCC)
+
+TeeGLclx56.bpl: TeeGLclx.dpk
+  $(DCC)
+
+TeeLanguageClx56.bpl: TeeLanguageClx.dpk
+  $(DCC)
+
+DclTeeProclx56.bpl: DclTeeProclx.dpk
+  $(DCC)
+
+DclTGLclx56.bpl: DclTGLclx.dpk
+  $(DCC)
+
+TeeImageclx56.bpl: TeeImageclx.dpk
+  $(DCC)
+

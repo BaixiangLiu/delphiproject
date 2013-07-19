@@ -1,0 +1,42 @@
+package DclTeePro66;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{ DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{ LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $42900000}
+{$DESCRIPTION 'TeeChart Pro 6 Components'}
+{$LIBSUFFIX ''}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  teepro66,
+  dcltee66,
+  tee66,
+  teelanguage66;
+
+contains
+  TeeChartPro in 'TeeChartPro.pas',
+  TeeSeriesDesign in 'TeeSeriesDesign.pas' {SeriesEditor};
+
+end.
+

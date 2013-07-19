@@ -1,0 +1,331 @@
+object FormTee3D: TFormTee3D
+  Left = 352
+  Top = 100
+  ActiveControl = CBView3d
+  AutoScroll = False
+  BorderIcons = [biSystemMenu]
+  ClientHeight = 214
+  ClientWidth = 367
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GB3D: TGroupBox
+    Left = 5
+    Top = -1
+    Width = 357
+    Height = 209
+    HelpContext = 361
+    TabOrder = 0
+    object L13: TLabel
+      Left = 14
+      Top = 41
+      Width = 28
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '3&D %:'
+      FocusControl = SE3d
+    end
+    object L4: TLabel
+      Left = 155
+      Top = 15
+      Width = 30
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Zoom:'
+      FocusControl = SBZoom
+    end
+    object L35: TLabel
+      Left = 142
+      Top = 43
+      Width = 43
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Rotation:'
+      FocusControl = SBRotation
+    end
+    object L36: TLabel
+      Left = 138
+      Top = 70
+      Width = 47
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'E&levation:'
+      FocusControl = SBElevation
+    end
+    object LZoom: TLabel
+      Left = 318
+      Top = 15
+      Width = 26
+      Height = 13
+      Caption = '100%'
+    end
+    object LRotation: TLabel
+      Left = 318
+      Top = 44
+      Width = 18
+      Height = 13
+      Caption = '360'
+    end
+    object LElevation: TLabel
+      Left = 318
+      Top = 71
+      Width = 18
+      Height = 13
+      Caption = '360'
+    end
+    object Label1: TLabel
+      Left = 124
+      Top = 105
+      Width = 61
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Horiz. Offset:'
+      FocusControl = SBHOffset
+    end
+    object LHOffset: TLabel
+      Left = 318
+      Top = 106
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Label3: TLabel
+      Left = 129
+      Top = 129
+      Width = 56
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Vert. Offset:'
+      FocusControl = SBVOffset
+    end
+    object LVOffset: TLabel
+      Left = 318
+      Top = 130
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Label2: TLabel
+      Left = 126
+      Top = 157
+      Width = 59
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Perspective:'
+      FocusControl = SBPerspec
+    end
+    object LPerspec: TLabel
+      Left = 317
+      Top = 160
+      Width = 6
+      Height = 13
+      Caption = '0'
+    end
+    object Label4: TLabel
+      Left = 12
+      Top = 95
+      Width = 30
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Angle:'
+      FocusControl = EOrthoAngle
+    end
+    object LTextSize: TLabel
+      Left = 164
+      Top = 184
+      Width = 8
+      Height = 13
+      Caption = '%'
+    end
+    object CBView3d: TCheckBox
+      Left = 9
+      Top = 14
+      Width = 112
+      Height = 17
+      HelpContext = 675
+      Caption = '&3 Dimensions'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+      OnClick = CBView3dClick
+    end
+    object SE3d: TEdit
+      Left = 46
+      Top = 37
+      Width = 35
+      Height = 21
+      HelpContext = 140
+      TabOrder = 1
+      Text = '15'
+      OnChange = SE3dChange
+    end
+    object CBOrthogonal: TCheckBox
+      Left = 9
+      Top = 71
+      Width = 104
+      Height = 17
+      HelpContext = 750
+      Caption = '&Orthogonal'
+      TabOrder = 2
+      OnClick = CBOrthogonalClick
+    end
+    object SBZoom: TTrackBar
+      Left = 185
+      Top = 11
+      Width = 132
+      Height = 25
+      HelpContext = 754
+      LineSize = 5
+      Max = 500
+      Min = 1
+      Frequency = 20
+      Position = 100
+      TabOrder = 3
+      OnChange = SBZoomChange
+    end
+    object SBRotation: TTrackBar
+      Left = 185
+      Top = 40
+      Width = 132
+      Height = 25
+      HelpContext = 751
+      Max = 360
+      Min = 180
+
+      Frequency = 10
+      Position = 270
+      TabOrder = 4
+      OnChange = SBRotationChange
+    end
+    object SBElevation: TTrackBar
+      Left = 185
+      Top = 67
+      Width = 132
+      Height = 25
+      HelpContext = 748
+      Max = 360
+      Min = 270
+
+      Frequency = 10
+      Position = 270
+      TabOrder = 5
+      OnChange = SBElevationChange
+    end
+    object SBHOffset: TTrackBar
+      Left = 185
+      Top = 102
+      Width = 132
+      Height = 25
+      HelpContext = 749
+      LineSize = 10
+      Max = 1500
+      Min = -1500
+      Frequency = 250
+      TabOrder = 6
+      OnChange = SBHOffsetChange
+    end
+    object SBVOffset: TTrackBar
+      Left = 185
+      Top = 126
+      Width = 132
+      Height = 25
+      HelpContext = 753
+      LineSize = 10
+      Max = 1500
+      Min = -1500
+      Frequency = 250
+      TabOrder = 7
+      OnChange = SBVOffsetChange
+    end
+    object UD3D: TUpDown
+      Left = 81
+      Top = 37
+      Width = 15
+      Height = 21
+      HelpContext = 140
+      Associate = SE3d
+      Min = 1
+      Increment = 5
+      Position = 15
+      TabOrder = 8
+    end
+    object CBZoomText: TCheckBox
+      Left = 9
+      Top = 182
+      Width = 90
+      Height = 17
+      HelpContext = 773
+      Caption = 'Zoom &Text'
+      TabOrder = 9
+      OnClick = CBZoomTextClick
+    end
+    object SBPerspec: TTrackBar
+      Left = 185
+      Top = 154
+      Width = 132
+      Height = 25
+      HelpContext = 892
+      Max = 100
+      Frequency = 5
+      TabOrder = 10
+      OnChange = SBPerspecChange
+    end
+    object EOrthoAngle: TEdit
+      Left = 46
+      Top = 92
+      Width = 35
+      Height = 21
+      HelpContext = 1312
+      TabOrder = 11
+      Text = '45'
+      OnChange = EOrthoAngleChange
+    end
+    object UDOrthoAngle: TUpDown
+      Left = 81
+      Top = 92
+      Width = 15
+      Height = 21
+      HelpContext = 1312
+      Associate = EOrthoAngle
+      Max = 180
+      Increment = 5
+      Position = 45
+      TabOrder = 12
+    end
+    object CBClipPoints: TCheckBox
+      Left = 9
+      Top = 128
+      Width = 102
+      Height = 17
+      HelpContext = 155
+      Caption = '&Clip Points'
+      TabOrder = 13
+      OnClick = CBClipPointsClick
+    end
+    object ETextSize: TEdit
+      Left = 104
+      Top = 180
+      Width = 41
+      Height = 21
+      TabOrder = 14
+      Text = '100'
+      OnChange = ETextSizeChange
+    end
+    object UDTextSize: TUpDown
+      Left = 145
+      Top = 180
+      Width = 15
+      Height = 21
+      Associate = ETextSize
+      Min = 1
+      Max = 1000
+      Increment = 5
+      Position = 100
+      TabOrder = 15
+    end
+  end
+end

@@ -1,0 +1,211 @@
+object PieSeriesEditor: TPieSeriesEditor
+  Left = 317
+  Top = 261
+  AutoScroll = False
+  BorderIcons = [biSystemMenu]
+  ClientHeight = 198
+  ClientWidth = 340
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label4: TLabel
+    Left = 25
+    Top = 11
+    Width = 78
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '&Explode biggest:'
+    FocusControl = SEExpBig
+  end
+  object Label2: TLabel
+    Left = 48
+    Top = 40
+    Width = 56
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Total angle:'
+  end
+  object CBDark3d: TCheckBox
+    Left = 176
+    Top = 147
+    Width = 111
+    Height = 17
+    HelpContext = 1489
+    Caption = '&Dark 3D'
+    TabOrder = 0
+    OnClick = CBDark3dClick
+  end
+  object GroupBox2: TGroupBox
+    Left = 5
+    Top = 62
+    Width = 157
+    Height = 131
+    Caption = 'Group slices:'
+    TabOrder = 1
+    object Label5: TLabel
+      Left = 24
+      Top = 24
+      Width = 26
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Style:'
+      FocusControl = CBOther
+    end
+    object Label6: TLabel
+      Left = 20
+      Top = 49
+      Width = 30
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Value:'
+      FocusControl = EOtherValue
+    end
+    object Label7: TLabel
+      Left = 21
+      Top = 74
+      Width = 29
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '&Label:'
+      FocusControl = EOtherLabel
+    end
+    object CBOther: TComboFlat
+      Left = 52
+      Top = 20
+      Width = 99
+      HelpContext = 758
+      TabOrder = 0
+      OnChange = CBOtherChange
+      Items.Strings = (
+        'None'
+        'Below %'
+        'Below Value')
+    end
+    object EOtherValue: TEdit
+      Left = 52
+      Top = 45
+      Width = 65
+      Height = 21
+      HelpContext = 760
+      TabOrder = 1
+      Text = '0'
+      OnChange = EOtherValueChange
+    end
+    object EOtherLabel: TEdit
+      Left = 52
+      Top = 70
+      Width = 99
+      Height = 21
+      HelpContext = 759
+      TabOrder = 2
+      Text = 'Other'
+      OnChange = EOtherLabelChange
+    end
+    object Button2: TButton
+      Left = 52
+      Top = 96
+      Width = 75
+      Height = 25
+      HelpContext = 1932
+      Caption = 'Le&gend...'
+      TabOrder = 3
+      OnClick = Button2Click
+    end
+  end
+  object SEExpBig: TEdit
+    Left = 106
+    Top = 8
+    Width = 39
+    Height = 21
+    HelpContext = 756
+    TabOrder = 2
+    Text = '0'
+    OnChange = SEExpBigChange
+  end
+  object UDExpBig: TUpDown
+    Left = 145
+    Top = 8
+    Width = 15
+    Height = 21
+    HelpContext = 756
+    Associate = SEExpBig
+    Increment = 5
+    TabOrder = 3
+  end
+  object CBPatterns: TCheckBox
+    Left = 176
+    Top = 64
+    Width = 105
+    Height = 17
+    HelpContext = 664
+    Caption = 'Pa&tterns'
+    TabOrder = 4
+    OnClick = CBPatternsClick
+  end
+  object BPen: TButtonPen
+    Left = 173
+    Top = 6
+    HelpContext = 850
+    Caption = '&Border...'
+    TabOrder = 5
+  end
+  object Edit1: TEdit
+    Left = 106
+    Top = 37
+    Width = 39
+    Height = 21
+    HelpContext = 1090
+    TabOrder = 6
+    Text = '360'
+    OnChange = Edit1Change
+  end
+  object UDAngleSize: TUpDown
+    Left = 145
+    Top = 37
+    Width = 15
+    Height = 21
+    HelpContext = 1090
+    Associate = Edit1
+    Min = 1
+    Max = 360
+    Increment = 5
+    Position = 360
+    TabOrder = 7
+  end
+  object BShadow: TButton
+    Left = 173
+    Top = 88
+    Width = 75
+    Height = 25
+    HelpContext = 1847
+    Caption = 'S&hadow...'
+    TabOrder = 8
+    OnClick = BShadowClick
+  end
+  object CBMarksAutoPosition: TCheckBox
+    Left = 176
+    Top = 124
+    Width = 153
+    Height = 17
+    HelpContext = 78
+    Caption = '&Auto Mark Position'
+    Checked = True
+    State = cbChecked
+    TabOrder = 9
+    OnClick = CBMarksAutoPositionClick
+  end
+  object CBDarkBorder: TCheckBox
+    Left = 176
+    Top = 40
+    Width = 97
+    Height = 17
+    HelpContext = 1848
+    Caption = 'Dark B&order'
+    TabOrder = 10
+    OnClick = CBDarkBorderClick
+  end
+end
