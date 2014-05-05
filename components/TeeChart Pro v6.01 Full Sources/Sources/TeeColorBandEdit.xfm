@@ -1,0 +1,112 @@
+inherited ColorBandToolEditor: TColorBandToolEditor
+  Left = 408
+  Top = 377
+  ClientHeight = 213
+  ClientWidth = 249
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label2: TLabel [1]
+    Left = 39
+    Top = 113
+    Width = 54
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '&Start value:'
+    FocusControl = EStart
+  end
+  object Label3: TLabel [2]
+    Left = 42
+    Top = 137
+    Width = 51
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '&End value:'
+    FocusControl = EEnd
+  end
+  object Label4: TLabel [3]
+    Left = 21
+    Top = 168
+    Width = 68
+    Height = 13
+    Caption = '&Transparency:'
+    FocusControl = ETrans
+  end
+  inherited BPen: TButtonPen
+    Left = 24
+    Width = 97
+  end
+  object BPattern: TButton
+    Left = 139
+    Top = 40
+    Width = 75
+    Height = 25
+    HelpContext = 1154
+    Caption = '&Pattern...'
+    TabOrder = 2
+    OnClick = BPatternClick
+  end
+  object EStart: TEdit
+    Left = 93
+    Top = 110
+    Width = 121
+    Height = 21
+    HelpContext = 1157
+    TabOrder = 4
+    OnChange = EStartChange
+  end
+  object EEnd: TEdit
+    Left = 93
+    Top = 134
+    Width = 121
+    Height = 21
+    HelpContext = 1156
+    TabOrder = 5
+    OnChange = EEndChange
+  end
+  object BGradient: TButton
+    Left = 24
+    Top = 72
+    Width = 97
+    Height = 25
+    HelpContext = 1160
+    Caption = '&Gradient...'
+    TabOrder = 3
+    OnClick = BGradientClick
+  end
+  object ButtonColor1: TButtonColor
+    Left = 139
+    Top = 72
+    HelpContext = 1159
+    Caption = '&Color...'
+    TabOrder = 6
+  end
+  object ETrans: TEdit
+    Left = 93
+    Top = 166
+    Width = 41
+    Height = 21
+    HelpContext = 1160
+    TabOrder = 7
+    Text = '0'
+    OnChange = ETransChange
+  end
+  object UDTrans: TUpDown
+    Left = 134
+    Top = 166
+    Width = 15
+    Height = 21
+    HelpContext = 1161
+    Associate = ETrans
+    TabOrder = 8
+  end
+  object CBDrawBehind: TCheckBox
+    Left = 93
+    Top = 192
+    Width = 121
+    Height = 17
+    HelpContext = 1158
+    Caption = '&Draw Behind'
+    TabOrder = 9
+    OnClick = CBDrawBehindClick
+  end
+end

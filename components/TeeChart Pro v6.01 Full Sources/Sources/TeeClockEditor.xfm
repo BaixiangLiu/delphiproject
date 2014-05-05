@@ -1,0 +1,104 @@
+inherited ClockEditor: TClockEditor
+  Left = 469
+  Top = 203
+  Width = 365
+  Height = 193
+  VertScrollBar.Range = 153
+  ActiveControl = nil
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited LAngleInc: TLabel
+    Visible = False
+  end
+  inherited Label8: TLabel
+    Visible = False
+  end
+  inherited CBClose: TCheckBox
+    Visible = False
+  end
+  inherited SEAngleInc: TEdit
+    TabOrder = 3
+    Visible = False
+    OnChange = SEAngleIncChange
+  end
+  inherited SERadiusInc: TEdit
+    Top = 101
+    TabOrder = 5
+    Visible = False
+  end
+  inherited UDRadiusInc: TUpDown
+    TabOrder = 11
+    Visible = False
+  end
+  inherited UDAngleInc: TUpDown
+    TabOrder = 4
+    Visible = False
+  end
+  inherited BPen: TButtonPen
+    Visible = False
+  end
+  inherited BPiePen: TButtonPen
+    TabOrder = 16
+  end
+  inherited GroupBox1: TGroupBox
+    TabOrder = 15
+    inherited BFont: TButton
+      Left = 8
+      Top = 85
+    end
+    inherited CBClockWise: TCheckBox
+      Visible = False
+    end
+    inherited CBInside: TCheckBox
+      TabOrder = 5
+    end
+    object CBRoman: TCheckBox
+      Left = 75
+      Top = 16
+      Width = 84
+      Height = 17
+      HelpContext = 1925
+      Caption = '&Roman'
+      TabOrder = 4
+      OnClick = CBRomanClick
+    end
+  end
+  inherited Edit1: TEdit
+    TabOrder = 13
+  end
+  inherited UDTransp: TUpDown
+    TabOrder = 14
+  end
+  inherited BColor: TButtonColor
+    TabOrder = 10
+  end
+  object BHour: TButtonPen
+    Left = 8
+    Top = 100
+    HelpContext = 1763
+    Caption = '&Hours...'
+    TabOrder = 7
+  end
+  object BMinute: TButtonPen
+    Left = 96
+    Top = 100
+    HelpContext = 1764
+    Caption = '&Minutes...'
+    TabOrder = 9
+  end
+  object BSecond: TButtonPen
+    Left = 192
+    Top = 128
+    Width = 105
+    HelpContext = 1765
+    Caption = '&Seconds...'
+    TabOrder = 6
+  end
+  object BRadius: TButtonPen
+    Left = 8
+    Top = 72
+    HelpContext = 240
+    Caption = 'R&adius...'
+    TabOrder = 8
+  end
+end

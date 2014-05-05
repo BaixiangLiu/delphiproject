@@ -1,0 +1,92 @@
+inherited NearestToolEdit: TNearestToolEdit
+  Left = 326
+  Top = 255
+  ClientHeight = 166
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label2: TLabel [1]
+    Left = 42
+    Top = 108
+    Width = 23
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'S&ize:'
+    FocusControl = Edit1
+  end
+  object Label3: TLabel [2]
+    Left = 39
+    Top = 139
+    Width = 26
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'S&tyle:'
+    FocusControl = CBStyle
+  end
+  inherited CBSeries: TComboFlat
+    HelpContext = 1266
+    TabOrder = 6
+  end
+  object BPen: TButtonPen
+    Left = 56
+    Top = 40
+    HelpContext = 1150
+    Caption = '&Pen...'
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 144
+    Top = 40
+    Width = 75
+    Height = 25
+    HelpContext = 1147
+    Caption = '&Brush...'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object CBDrawLine: TCheckBox
+    Left = 72
+    Top = 80
+    Width = 121
+    Height = 17
+    HelpContext = 1148
+    Caption = '&Draw Line'
+    TabOrder = 2
+    OnClick = CBDrawLineClick
+  end
+  object Edit1: TEdit
+    Left = 72
+    Top = 104
+    Width = 49
+    Height = 21
+    HelpContext = 1151
+    TabOrder = 3
+    Text = '0'
+    OnChange = Edit1Change
+  end
+  object UDSize: TUpDown
+    Left = 121
+    Top = 104
+    Width = 15
+    Height = 21
+    HelpContext = 1267
+    Associate = Edit1
+    Min = 0
+    Max = 200
+    Position = 0
+    TabOrder = 5
+    Wrap = False
+  end
+  object CBStyle: TComboFlat
+    Left = 72
+    Top = 136
+    Width = 145
+    HelpContext = 1152
+    TabOrder = 4
+    OnChange = CBStyleChange
+    Items.Strings = (
+      'None'
+      'Circle'
+      'Rectangle'
+      'Diamond')
+  end
+end

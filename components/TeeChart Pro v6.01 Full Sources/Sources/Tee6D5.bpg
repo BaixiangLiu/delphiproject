@@ -1,0 +1,55 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe -Q $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#----------------------------------------------------------------------------------
+PROJECTS = Tee65.bpl TeeUI65.bpl TeeDB65.bpl DclTee65.bpl TeeQR65.bpl \
+  DCLTQR65.bpl TeePro65.bpl TeeGL65.bpl TeeLanguage65.bpl DCLTeePro65.bpl \
+  DclTGL65.bpl TeeImage65.bpl
+#----------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Tee65.bpl: Tee65.dpk
+  $(DCC)
+
+TeeDB65.bpl: TeeDB65.dpk
+  $(DCC)
+
+TeeUI65.bpl: TeeUI65.dpk
+  $(DCC)
+
+DclTee65.bpl: DclTee65.dpk
+  $(DCC)
+
+TeeQR65.bpl: TeeQR65.dpk
+  $(DCC)
+
+DCLTQR65.bpl: DCLTQR65.dpk
+  $(DCC)
+
+TeePro65.bpl: TeePro65.dpk
+  $(DCC)
+
+TeeGL65.bpl: TeeGL65.dpk
+  $(DCC)
+
+TeeLanguage65.bpl: TeeLanguage65.dpk
+  $(DCC)
+
+DCLTeePro65.bpl: DCLTeePro65.dpk
+  $(DCC)
+
+DclTGL65.bpl: DclTGL65.dpk
+  $(DCC)
+
+TeeImage65.bpl: TeeImage65.dpk
+  $(DCC)
+
+

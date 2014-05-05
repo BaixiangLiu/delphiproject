@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value=".\DclTeePro6C5.bpl"/>
+    <OBJFILES value="TeeChartPro.obj DclTeePro6C5.obj"/>
+    <RESFILES value="dclteepro6C5.res"/>
+    <IDLFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl50.lib vclx50.lib teepro6C5.lib dcltee6C5.lib dsnide50.lib TEE6C5.lib 
+      TEEUI6C5.lib"/>
+    <PACKAGES value="teepro6C5.bpi dcltee6C5.bpi Tee6C5.bpi TeeUI6C5.bpi vcl50.bpi dsnide50.bpi 
+      TeeDB6C5.bpi Vclx50.bpi TeeLanguage6C5.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;_VIS_NOLIB;USEPACKAGES"/>
+    <MAINSOURCE value="DclTeePro6C5.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+    <WARNOPTSTR value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl50.csm -Hc -Vx -Ve -X- -a8 -b- -k- -vi -c -tW -tWM"/>
+    <PFLAGS value="-N2. -N0. -$Y- -$L- -$D- -$C- -v -M -JPHNE -U$(BCB)\source\toolsapi"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-l. -I. -D&quot;TeeChart Pro 6 Components&quot; -aa -Tpp -Gpd -x -Gl -Gi -w"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=5
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=1
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=David Berneda
+FileDescription=TeeChart Pro 5.0
+FileVersion=5.0.0.0
+InternalName=
+LegalCopyright=Copyright © 1995-2000 by David Berneda
+LegalTrademarks=
+OriginalFilename=
+ProductName=TeeChart Pro
+ProductVersion=5.0
+Comments=
+
+[Excluded Packages]
+F:\kylix\Compiled\BuilderC5\Bin\DclTQR6C5.bpl=TeeChart 5.0 for QuickReport Components
+F:\kylix\Compiled\BuilderC5\Bin\DCLTEE6C5.BPL=TeeChart 6 Components
+F:\kylix\Compiled\BuilderC5\Bin\DclTeePro6C5.bpl=TeeChart Pro 6 Components
+F:\kylix\Compiled\BuilderC5\Bin\DclTGL6C5.bpl=TeeChart OpenGL 5.0 Components
+F:\kylix\Compiled\BuilderC5\System\TeeImage6C5.bpl=TeeChart 6 Image formats
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=4
+Item0=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi
+Item1=$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\source\toolsapi
+Item2=$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item3=$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_RTLDLL;USEPACKAGES
+
+[HistoryLists\hlIntOutputDir]
+Count=1
+Item0=.
+
+[HistoryLists\hlFinalOutputDir]
+Count=2
+Item0=.
+Item1=$(BCB)\Projects\bpl
+
+[HistoryLists\hIBPIOutputDir]
+Count=2
+Item0=.
+Item1=$(BCB)\Projects\Lib
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

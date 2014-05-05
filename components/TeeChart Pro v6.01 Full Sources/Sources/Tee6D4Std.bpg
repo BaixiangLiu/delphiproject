@@ -1,0 +1,44 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe -Q -DNOUSE_BDE $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#----------------------------------------------------------------------------------
+PROJECTS = Tee64.bpl TeeUI64.bpl DclTeeStd64.bpl \
+  TeePro64.bpl TeeLanguage64.bpl DCLTeeProStd64.bpl TeeGL64.bpl \
+  DclTGL64.bpl TeeImage64.bpl
+#----------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+Tee64.bpl: Tee64.dpk
+  $(DCC)
+
+TeeUI64.bpl: TeeUI64.dpk
+  $(DCC)
+
+DCLTeeStd64.bpl: DCLTeeStd64.dpk
+  $(DCC)
+
+TeePro64.bpl: TeePro64.dpk
+  $(DCC)
+
+TeeGL64.bpl: TeeGL64.dpk
+  $(DCC)
+
+DCLTeeProStd64.bpl: DCLTeeProStd64.dpk
+  $(DCC)
+
+DclTGL64.bpl: DclTGL64.dpk
+  $(DCC)
+
+TeeImage64.bpl: TeeImage64.dpk
+  $(DCC)
+
+TeeLanguage64.bpl: TeeLanguage64.dpk
+  $(DCC)

@@ -1,0 +1,157 @@
+object FormTeeWall: TFormTeeWall
+  Left = 200
+  Top = 102
+  ActiveControl = CBView3dWalls
+  AutoScroll = False
+  BorderIcons = [biSystemMenu]
+  ClientHeight = 234
+  ClientWidth = 367
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object CBView3dWalls: TCheckBox
+    Left = 12
+    Top = 9
+    Width = 141
+    Height = 17
+    HelpContext = 676
+    Caption = '&Visible Walls'
+    TabOrder = 0
+    OnClick = CBView3dWallsClick
+  end
+  object TabSubWalls: TTabControl
+    Left = 72
+    Top = 32
+    Width = 226
+    Height = 190
+    HelpContext = 347
+    HotTrack = True
+    TabOrder = 1
+    OnChange = TabSubWallsChange
+    object L33: TLabel
+      Left = 125
+      Top = 98
+      Width = 23
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Siz&e:'
+      FocusControl = SEWallSize
+    end
+    object Label1: TLabel
+      Left = 48
+      Top = 162
+      Width = 68
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'T&ransparency:'
+      FocusControl = Edit1
+    end
+    object BWallColor: TButtonColor
+      Left = 24
+      Top = 29
+      HelpContext = 162
+      Caption = '&Color...'
+      TabOrder = 0
+    end
+    object BWallPen: TButtonPen
+      Left = 24
+      Top = 61
+      HelpContext = 377
+      Caption = 'B&order...'
+      TabOrder = 1
+    end
+    object BWallBrush: TButton
+      Left = 24
+      Top = 93
+      Width = 75
+      Height = 25
+      HelpContext = 116
+      Caption = '&Pattern...'
+      TabOrder = 2
+      OnClick = BWallBrushClick
+    end
+    object SEWallSize: TEdit
+      Left = 153
+      Top = 95
+      Width = 29
+      Height = 21
+      HelpContext = 115
+      TabOrder = 3
+      Text = '0'
+      OnChange = SEWallSizeChange
+    end
+    object CBTransp: TCheckBox
+      Left = 120
+      Top = 129
+      Width = 96
+      Height = 17
+      HelpContext = 779
+      Caption = '&Transparent'
+      TabOrder = 4
+      OnClick = CBTranspClick
+    end
+    object UDWallSize: TUpDown
+      Left = 182
+      Top = 95
+      Width = 15
+      Height = 21
+      HelpContext = 115
+      Associate = SEWallSize
+      TabOrder = 5
+    end
+    object CBDark3D: TCheckBox
+      Left = 120
+      Top = 65
+      Width = 97
+      Height = 17
+      HelpContext = 176
+      Caption = '&Dark 3D'
+      TabOrder = 6
+      OnClick = CBDark3DClick
+    end
+    object BGradient: TButton
+      Left = 24
+      Top = 125
+      Width = 75
+      Height = 25
+      HelpContext = 508
+      Caption = '&Gradient...'
+      TabOrder = 7
+      Visible = False
+      OnClick = BGradientClick
+    end
+    object CBVisible: TCheckBox
+      Left = 120
+      Top = 33
+      Width = 96
+      Height = 17
+      HelpContext = 1469
+      Caption = 'V&isible'
+      TabOrder = 8
+      OnClick = CBVisibleClick
+    end
+    object Edit1: TEdit
+      Left = 121
+      Top = 159
+      Width = 29
+      Height = 21
+      HelpContext = 779
+      TabOrder = 9
+      Text = '0'
+      OnChange = Edit1Change
+    end
+    object UDTransp: TUpDown
+      Left = 150
+      Top = 159
+      Width = 15
+      Height = 21
+      HelpContext = 779
+      Associate = Edit1
+      TabOrder = 10
+    end
+  end
+end

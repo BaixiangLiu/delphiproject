@@ -1,0 +1,19 @@
+inherited BarJoinEditor: TBarJoinEditor
+  Left = 218
+  Top = 375
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited BGradient: TButton
+    Left = 44
+  end
+  inherited EBevel: TEdit
+    TabOrder = 12
+  end
+  object BJoin: TButtonPen
+    Left = 44
+    Top = 164
+    HelpContext = 1255
+    Caption = '&Join...'
+    TabOrder = 10
+  end
+end
