@@ -1,0 +1,3 @@
+想添加的功能是，每隔500ms，窗口隐蔽一次，即时截图，重新绘制，然后再次置顶。
+SetWindowPos(handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE);当前窗口制定SetWindowPos(handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_HIDEWINDOW); 当前窗口隐蔽
+为什么调用窗口隐蔽之后，再次置顶，无任何反应。。。
