@@ -1,0 +1,52 @@
+object FMEDITL: TFMEDITL
+  Left = 300
+  Top = 343
+  BorderStyle = bsToolWindow
+  Caption = '数据输入说明'
+  ClientHeight = 132
+  ClientWidth = 313
+  Color = clWhite
+  Enabled = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = '新宋体'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = True
+  Position = poDefault
+  PrintScale = poNone
+  Scaled = False
+  WindowState = wsMinimized
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 12
+  object Label2: TLabel
+    Left = 0
+    Top = 115
+    Width = 313
+    Height = 17
+    Align = alBottom
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '红色为国历  录色为农历'
+    Color = 10485760
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = '新宋体'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object CLCal1: TCLCal
+    Left = 0
+    Top = 0
+    Width = 313
+    Height = 116
+    Align = alTop
+    StartOfWeek = 0
+    TabOrder = 0
+  end
+end

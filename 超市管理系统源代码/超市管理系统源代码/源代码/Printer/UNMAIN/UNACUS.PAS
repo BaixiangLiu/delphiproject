@@ -1,0 +1,181 @@
+unit UNACUS;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Mask, DBCtrls, JEdit, JLOOKUP, Spin;
+
+type
+  TFMACUS = class(TForm)
+    LBASQA1: TLabel;
+    LBASQA2: TLabel;
+    LBASQA3: TLabel;
+    LBASQA4: TLabel;
+    LBASQA5: TLabel;
+    LBASQC1: TLabel;
+    LBASQC2: TLabel;
+    LBBMNAM: TLabel;
+    BMNAM: TJEDIT;
+    LBBMBTH: TLabel;
+    LBBMSEX: TLabel;
+    BMSEX: TJEDIT;
+    ASQB1: TCheckBox;
+    ASQB2: TCheckBox;
+    ASQB3: TCheckBox;
+    ASQB4: TCheckBox;
+    ASQB5: TCheckBox;
+    ASQA1: JLOOKUPBOX;
+    ASQA2: JLOOKUPBOX;
+    ASQA3: JLOOKUPBOX;
+    ASQA4: JLOOKUPBOX;
+    ASQA5: JLOOKUPBOX;
+    ASQC1: TJEdit;
+    ASQC2: TJEdit;
+    BMBTH: TJEdit;
+    Label1: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ASQA1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FMACUS: TFMACUS;
+
+implementation
+
+USES SYSINI, UN_UTL, UNPOSA;
+
+{$R *.DFM}
+
+procedure TFMACUS.FormCreate(Sender: TObject);
+VAR SETFILENAME : STRING;
+begin
+//流动客分析资料
+if ACUS_ASQA1 ='' then LBASQA1.Visible := FALSE ELSE LBASQA1.Caption := ACUS_ASQA1;
+if ACUS_ASQA2 ='' then LBASQA2.Visible := FALSE ELSE LBASQA2.Caption := ACUS_ASQA2;
+if ACUS_ASQA3 ='' then LBASQA3.Visible := FALSE ELSE LBASQA3.Caption := ACUS_ASQA3;
+if ACUS_ASQA4 ='' then LBASQA4.Visible := FALSE ELSE LBASQA4.Caption := ACUS_ASQA4;
+if ACUS_ASQA5 ='' then LBASQA5.Visible := FALSE ELSE LBASQA5.Caption := ACUS_ASQA5;
+if ACUS_ASQA1 ='' then ASQA1.Visible := FALSE;
+if ACUS_ASQA2 ='' then ASQA2.Visible := FALSE;
+if ACUS_ASQA3 ='' then ASQA3.Visible := FALSE;
+if ACUS_ASQA4 ='' then ASQA4.Visible := FALSE;
+if ACUS_ASQA5 ='' then ASQA5.Visible := FALSE;
+if ACUS_ASQB1 ='' then ASQB1.Visible := FALSE ELSE ASQB1.Caption := ACUS_ASQB1;
+if ACUS_ASQB2 ='' then ASQB2.Visible := FALSE ELSE ASQB2.Caption := ACUS_ASQB2;
+if ACUS_ASQB3 ='' then ASQB3.Visible := FALSE ELSE ASQB3.Caption := ACUS_ASQB3;
+if ACUS_ASQB4 ='' then ASQB4.Visible := FALSE ELSE ASQB4.Caption := ACUS_ASQB4;
+if ACUS_ASQB5 ='' then ASQB5.Visible := FALSE ELSE ASQB5.Caption := ACUS_ASQB5;
+
+
+
+
+
+SETFILENAME := _PATH_INI+'UNACUS.INI';
+
+ASQA1.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQA1' ,'');
+ASQA2.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQA2' ,'');
+ASQA3.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQA3' ,'');
+ASQA4.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQA4' ,'');
+ASQA5.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQA5' ,'');
+
+ASQB1.Checked   := INI_LOAD_BOOL(SETFILENAME,'ASQB1' ,FALSE);
+ASQB2.Checked   := INI_LOAD_BOOL(SETFILENAME,'ASQB2' ,FALSE);
+ASQB3.Checked   := INI_LOAD_BOOL(SETFILENAME,'ASQB3' ,FALSE);
+ASQB4.Checked   := INI_LOAD_BOOL(SETFILENAME,'ASQB4' ,FALSE);
+ASQB5.Checked   := INI_LOAD_BOOL(SETFILENAME,'ASQB5' ,FALSE);
+
+ASQC1.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQC1' ,'1');
+ASQC2.TEXT      := INI_LOAD_STR (SETFILENAME,'ASQC2' ,'1');
+BMNAM.TEXT      := INI_LOAD_STR (SETFILENAME,'BMNAM' ,'');
+BMBTH.TEXT      := INI_LOAD_STR (SETFILENAME,'BMBTH' ,'0');
+BMSEX.TEXT      := INI_LOAD_STR (SETFILENAME,'BMSEX' ,'0');
+end;
+
+procedure TFMACUS.FormClose(Sender: TObject; var Action: TCloseAction);
+VAR SETFILENAME : STRING;
+begin
+SETFILENAME := _PATH_INI+'UNACUS.INI';
+
+INI_SAVE_STR(SETFILENAME, 'ASQA1'  ,ASQA1.TEXT);
+INI_SAVE_STR(SETFILENAME, 'ASQA2'  ,ASQA2.TEXT);
+INI_SAVE_STR(SETFILENAME, 'ASQA3'  ,ASQA3.TEXT);
+INI_SAVE_STR(SETFILENAME, 'ASQA4'  ,ASQA4.TEXT);
+INI_SAVE_STR(SETFILENAME, 'ASQA5'  ,ASQA5.TEXT);
+
+INI_SAVE_BOOL(SETFILENAME,'ASQB1'  ,ASQB1.Checked);
+INI_SAVE_BOOL(SETFILENAME,'ASQB2'  ,ASQB2.Checked);
+INI_SAVE_BOOL(SETFILENAME,'ASQB3'  ,ASQB3.Checked);
+INI_SAVE_BOOL(SETFILENAME,'ASQB4'  ,ASQB4.Checked);
+INI_SAVE_BOOL(SETFILENAME,'ASQB5'  ,ASQB5.Checked);
+
+INI_SAVE_STR(SETFILENAME, 'ASQC1'  ,ASQC1.TEXT);
+INI_SAVE_STR(SETFILENAME, 'ASQC2'  ,ASQC2.TEXT);
+INI_SAVE_STR(SETFILENAME, 'BMNAM'  ,BMNAM.TEXT);
+INI_SAVE_STR(SETFILENAME, 'BMBTH'  ,BMBTH.TEXT);
+INI_SAVE_STR(SETFILENAME, 'BMSEX'  ,BMSEX.TEXT);
+
+FMACUS.Release;
+end;
+
+procedure TFMACUS.FormActivate(Sender: TObject);
+begin
+FMPOSA.AS_ASQA1 := '';
+FMPOSA.AS_ASQA2 := '';
+FMPOSA.AS_ASQA3 := '';
+FMPOSA.AS_ASQA4 := '';
+FMPOSA.AS_ASQA5 := '';
+FMPOSA.AS_ASQB1 := FALSE;
+FMPOSA.AS_ASQB2 := FALSE;
+FMPOSA.AS_ASQB3 := FALSE;
+FMPOSA.AS_ASQB4 := FALSE;
+FMPOSA.AS_ASQB5 := FALSE;
+FMPOSA.AS_ASQC1 := '';
+FMPOSA.AS_ASQC2 := '';
+FMPOSA.AS_BMNAM := '';
+FMPOSA.AS_BMBTH := '';
+FMPOSA.AS_BMSEX := '';
+ASQC1.SetFocus;
+end;
+
+procedure TFMACUS.ASQA1KeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
+begin
+
+IF KEY = 13 THEN
+   BEGIN
+   FMPOSA.AS_SAVE  := TRUE;
+   FMPOSA.AS_ASQA1 := ASQA1.TEXT;
+   FMPOSA.AS_ASQA2 := ASQA2.TEXT;
+   FMPOSA.AS_ASQA3 := ASQA3.TEXT;
+   FMPOSA.AS_ASQA4 := ASQA4.TEXT;
+   FMPOSA.AS_ASQA5 := ASQA5.TEXT;
+   FMPOSA.AS_ASQB1 := ASQB1.Checked;
+   FMPOSA.AS_ASQB2 := ASQB2.Checked;
+   FMPOSA.AS_ASQB3 := ASQB3.Checked;
+   FMPOSA.AS_ASQB4 := ASQB4.Checked;
+   FMPOSA.AS_ASQB5 := ASQB5.Checked;
+   FMPOSA.AS_ASQC1 := ASQC1.TEXT;
+   FMPOSA.AS_ASQC2 := ASQC2.TEXT;
+   FMPOSA.AS_BMNAM := BMNAM.TEXT;
+   FMPOSA.AS_BMBTH := BMBTH.TEXT;
+   FMPOSA.AS_BMSEX := BMSEX.TEXT;
+   CLOSE;
+   END;
+
+IF KEY = 27 THEN
+   BEGIN
+   FMPOSA.AS_SAVE  := FALSE;
+   CLOSE;
+   END;
+
+end;
+
+
+end.

@@ -1,0 +1,248 @@
+  object LBRBENO: TLabel       
+    Left = 10                            
+    Top = 0             
+    Caption = '借货单号'
+  end                                    
+  object RBENO  : TDBEdit      
+    Left = 100                           
+    Top = 0             
+    DataField  = 'RBENO'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBBGENO: TLabel       
+    Left = 10                            
+    Top = 23             
+    Caption = '产品编号'
+  end                                    
+  object BGENO  : TDBEdit      
+    Left = 100                           
+    Top = 23             
+    DataField  = 'BGENO'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBCN1: TLabel       
+    Left = 10                            
+    Top = 46             
+    Caption = '借用数量'
+  end                                    
+  object RBCN1  : TDBEdit      
+    Left = 100                           
+    Top = 46             
+    DataField  = 'RBCN1'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBCN2: TLabel       
+    Left = 10                            
+    Top = 69             
+    Caption = '归还数量'
+  end                                    
+  object RBCN2  : TDBEdit      
+    Left = 100                           
+    Top = 69             
+    DataField  = 'RBCN2'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBPST: TLabel       
+    Left = 10                            
+    Top = 92             
+    Caption = '库存位置'
+  end                                    
+  object RBPST  : TDBEdit      
+    Left = 100                           
+    Top = 92             
+    DataField  = 'RBPST'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBBCK: TLabel       
+    Left = 10                            
+    Top = 115             
+    Caption = '是否删除'
+  end                                    
+  object RBBCK  : TDBEdit      
+    Left = 100                           
+    Top = 115             
+    DataField  = 'RBBCK'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBOUT: TLabel       
+    Left = 10                            
+    Top = 138             
+    Caption = '是否保存'
+  end                                    
+  object RBOUT  : TDBEdit      
+    Left = 100                           
+    Top = 138             
+    DataField  = 'RBOUT'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBREA: TLabel       
+    Left = 10                            
+    Top = 161             
+    Caption = '借用原因'
+  end                                    
+  object RBREA  : TDBEdit      
+    Left = 100                           
+    Top = 161             
+    DataField  = 'RBREA'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBDT1: TLabel       
+    Left = 10                            
+    Top = 184             
+    Caption = '借用日期'
+  end                                    
+  object RBDT1  : TDBEdit      
+    Left = 100                           
+    Top = 184             
+    DataField  = 'RBDT1'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBTM1: TLabel       
+    Left = 10                            
+    Top = 207             
+    Caption = '借用时间'
+  end                                    
+  object RBTM1  : TDBEdit      
+    Left = 100                           
+    Top = 207             
+    DataField  = 'RBTM1'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBDT2: TLabel       
+    Left = 10                            
+    Top = 230             
+    Caption = '归还货日期'
+  end                                    
+  object RBDT2  : TDBEdit      
+    Left = 100                           
+    Top = 230             
+    DataField  = 'RBDT2'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBTM2: TLabel       
+    Left = 10                            
+    Top = 253             
+    Caption = '归还时间'
+  end                                    
+  object RBTM2  : TDBEdit      
+    Left = 100                           
+    Top = 253             
+    DataField  = 'RBTM2'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBBNENO: TLabel       
+    Left = 10                            
+    Top = 276             
+    Caption = '申请人员'
+  end                                    
+  object BNENO  : TDBEdit      
+    Left = 100                           
+    Top = 276             
+    DataField  = 'BNENO'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object LBRBMRK: TLabel       
+    Left = 10                            
+    Top = 299             
+    Caption = '借用备注'
+  end                                    
+  object RBMRK  : TDBEdit      
+    Left = 100                           
+    Top = 299             
+    DataField  = 'RBMRK'
+    DataSource = FMRBOWD.DSRBOW
+  end                                    
+  object DBGrid1: TDBGrid                
+    Left = 5
+    Top =  0
+    Width = 602
+    Height = 100
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+    Columns = <
+      item
+        FieldName = 'RBENO'
+        Title.Caption = '借货单号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'BGENO'
+        Title.Caption = '产品编号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBCN1'
+        Title.Caption = '借用数量'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBCN2'
+        Title.Caption = '归还数量'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBPST'
+        Title.Caption = '库存位置'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBBCK'
+        Title.Caption = '是否删除'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBOUT'
+        Title.Caption = '是否保存'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBREA'
+        Title.Caption = '借用原因'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBDT1'
+        Title.Caption = '借用日期'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBTM1'
+        Title.Caption = '借用时间'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBDT2'
+        Title.Caption = '归还货日期'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBTM2'
+        Title.Caption = '归还时间'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'BNENO'
+        Title.Caption = '申请人员'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBMRK'
+        Title.Caption = '借用备注'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+>
+  end

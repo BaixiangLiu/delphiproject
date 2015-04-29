@@ -1,0 +1,180 @@
+  object LBRGENO: TLabel       
+    Left = 10                            
+    Top = 0             
+    Caption = '领用单号'
+  end                                    
+  object RGENO  : TDBEdit      
+    Left = 100                           
+    Top = 0             
+    DataField  = 'RGENO'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBBGENO: TLabel       
+    Left = 10                            
+    Top = 23             
+    Caption = '产品编号'
+  end                                    
+  object BGENO  : TDBEdit      
+    Left = 100                           
+    Top = 23             
+    DataField  = 'BGENO'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRBPST: TLabel       
+    Left = 10                            
+    Top = 46             
+    Caption = '库存位置'
+  end                                    
+  object RBPST  : TDBEdit      
+    Left = 100                           
+    Top = 46             
+    DataField  = 'RBPST'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRGREA: TLabel       
+    Left = 10                            
+    Top = 69             
+    Caption = '领用原因'
+  end                                    
+  object RGREA  : TDBEdit      
+    Left = 100                           
+    Top = 69             
+    DataField  = 'RGREA'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRGDAT: TLabel       
+    Left = 10                            
+    Top = 92             
+    Caption = '领用日期'
+  end                                    
+  object RGDAT  : TDBEdit      
+    Left = 100                           
+    Top = 92             
+    DataField  = 'RGDAT'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRGTME: TLabel       
+    Left = 10                            
+    Top = 115             
+    Caption = '领用时间'
+  end                                    
+  object RGTME  : TDBEdit      
+    Left = 100                           
+    Top = 115             
+    DataField  = 'RGTME'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBBNENO: TLabel       
+    Left = 10                            
+    Top = 138             
+    Caption = '申请人员'
+  end                                    
+  object BNENO  : TDBEdit      
+    Left = 100                           
+    Top = 138             
+    DataField  = 'BNENO'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRGMRK: TLabel       
+    Left = 10                            
+    Top = 161             
+    Caption = '领用备注'
+  end                                    
+  object RGMRK  : TDBEdit      
+    Left = 100                           
+    Top = 161             
+    DataField  = 'RGMRK'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRGCNT: TLabel       
+    Left = 10                            
+    Top = 184             
+    Caption = '数量'
+  end                                    
+  object RGCNT  : TDBEdit      
+    Left = 100                           
+    Top = 184             
+    DataField  = 'RGCNT'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object LBRGOUT: TLabel       
+    Left = 10                            
+    Top = 207             
+    Caption = '是否保存'
+  end                                    
+  object RGOUT  : TDBEdit      
+    Left = 100                           
+    Top = 207             
+    DataField  = 'RGOUT'
+    DataSource = FMRGETD.DSRGET
+  end                                    
+  object DBGrid1: TDBGrid                
+    Left = 5
+    Top =  0
+    Width = 602
+    Height = 100
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+    Columns = <
+      item
+        FieldName = 'RGENO'
+        Title.Caption = '领用单号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'BGENO'
+        Title.Caption = '产品编号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBPST'
+        Title.Caption = '库存位置'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RGREA'
+        Title.Caption = '领用原因'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RGDAT'
+        Title.Caption = '领用日期'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RGTME'
+        Title.Caption = '领用时间'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'BNENO'
+        Title.Caption = '申请人员'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RGMRK'
+        Title.Caption = '领用备注'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RGCNT'
+        Title.Caption = '数量'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RGOUT'
+        Title.Caption = '是否保存'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+>
+  end

@@ -1,0 +1,78 @@
+     FMRBOWD.QRBOW.SQL.CLEAR;
+     FMRBOWD.QRBOW.SQL.ADD('SELECT *  ');
+     FMRBOWD.QRBOW.SQL.ADD('FROM RBOW ');
+     FMRBOWD.QRBOW.SQL.ADD('ORDER BY XXXXXXX ');
+-----------------                -
+-----------------                -
+     FMRBOWD.URBOW.InsertSQL.CLEAR;
+     FMRBOWD.URBOW.InsertSQL.Add('INSERT INTO RBOW ');
+     FMRBOWD.URBOW.InsertSQL.Add(' ( RBENO, BGENO, RBCN1, RBCN2, RBPST, RBBCK, RBOUT, RBREA, RBDT1, RBTM1, RBDT2, RBTM2, BNENO, RBMRK, ) ');
+     FMRBOWD.URBOW.InsertSQL.Add('VALUES ');
+     FMRBOWD.URBOW.InsertSQL.Add(' (:RBENO,:BGENO,:RBCN1,:RBCN2,:RBPST,:RBBCK,:RBOUT,:RBREA,:RBDT1,:RBTM1,:RBDT2,:RBTM2,:BNENO,:RBMRK, ) ');
+                             
+-----------------UPDATE TEXT
+     FMRBOWD.URBOW.ModifySQL.CLEAR;
+     FMRBOWD.URBOW.ModifySQL.Add('UPDATE RBOW ');
+     FMRBOWD.URBOW.ModifySQL.Add('SET ');
+     FMRBOWD.URBOW.ModifySQL.Add('RBENO = :RBENO ,');
+     FMRBOWD.URBOW.ModifySQL.Add('BGENO = :BGENO ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBCN1 = :RBCN1 ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBCN2 = :RBCN2 ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBPST = :RBPST ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBBCK = :RBBCK ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBOUT = :RBOUT ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBREA = :RBREA ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBDT1 = :RBDT1 ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBTM1 = :RBTM1 ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBDT2 = :RBDT2 ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBTM2 = :RBTM2 ,');
+     FMRBOWD.URBOW.ModifySQL.Add('BNENO = :BNENO ,');
+     FMRBOWD.URBOW.ModifySQL.Add('RBMRK = :RBMRK ,');
+
+----------------- EDIT ENABLE
+RBENO.Enabled := TRUE;
+BGENO.Enabled := TRUE;
+RBCN1.Enabled := TRUE;
+RBCN2.Enabled := TRUE;
+RBPST.Enabled := TRUE;
+RBBCK.Enabled := TRUE;
+RBOUT.Enabled := TRUE;
+RBREA.Enabled := TRUE;
+RBDT1.Enabled := TRUE;
+RBTM1.Enabled := TRUE;
+RBDT2.Enabled := TRUE;
+RBTM2.Enabled := TRUE;
+BNENO.Enabled := TRUE;
+RBMRK.Enabled := TRUE;
+
+-----------------
+RBENO.Enabled := FALSE;
+BGENO.Enabled := FALSE;
+RBCN1.Enabled := FALSE;
+RBCN2.Enabled := FALSE;
+RBPST.Enabled := FALSE;
+RBBCK.Enabled := FALSE;
+RBOUT.Enabled := FALSE;
+RBREA.Enabled := FALSE;
+RBDT1.Enabled := FALSE;
+RBTM1.Enabled := FALSE;
+RBDT2.Enabled := FALSE;
+RBTM2.Enabled := FALSE;
+BNENO.Enabled := FALSE;
+RBMRK.Enabled := FALSE;
+
+======================================
+    QRBOWRBENO.VALUE := ''  ;
+    QRBOWBGENO.VALUE := ''  ;
+    QRBOWRBCN1.VALUE := 0   ;
+    QRBOWRBCN2.VALUE := 0   ;
+    QRBOWRBPST.VALUE := ''  ;
+    QRBOWRBBCK.VALUE := FALSE;
+    QRBOWRBOUT.VALUE := FALSE;
+    QRBOWRBREA.VALUE := ''  ;
+    QRBOWRBDT1.VALUE := DATE;
+    QRBOWRBTM1.VALUE := ''  ;
+    QRBOWRBDT2.VALUE := DATE;
+    QRBOWRBTM2.VALUE := ''  ;
+    QRBOWBNENO.VALUE := ''  ;
+    QRBOWRBMRK.VALUE := ''  ;

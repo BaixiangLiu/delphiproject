@@ -1,0 +1,61 @@
+  object LBBMENO: TLabel       
+    Left = 10                            
+    Top = 0             
+    Caption = '会员编号'
+  end                                    
+  object BMENO  : TDBEdit      
+    Left = 100                           
+    Top = 0             
+    DataField  = 'BMENO'
+    DataSource = FMCCAWD.DSCCAW
+  end                                    
+  object LBCWGET: TLabel       
+    Left = 10                            
+    Top = 23             
+    Caption = '是否中奖'
+  end                                    
+  object CWGET  : TDBEdit      
+    Left = 100                           
+    Top = 23             
+    DataField  = 'CWGET'
+    DataSource = FMCCAWD.DSCCAW
+  end                                    
+  object LBCWGDS: TLabel       
+    Left = 10                            
+    Top = 46             
+    Caption = '中奖物品'
+  end                                    
+  object CWGDS  : TDBEdit      
+    Left = 100                           
+    Top = 46             
+    DataField  = 'CWGDS'
+    DataSource = FMCCAWD.DSCCAW
+  end                                    
+  object DBGrid1: TDBGrid                
+    Left = 5
+    Top =  0
+    Width = 602
+    Height = 100
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+    Columns = <
+      item
+        FieldName = 'BMENO'
+        Title.Caption = '会员编号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'CWGET'
+        Title.Caption = '是否中奖'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'CWGDS'
+        Title.Caption = '中奖物品'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+>
+  end

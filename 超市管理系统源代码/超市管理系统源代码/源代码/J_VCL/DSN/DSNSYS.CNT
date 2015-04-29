@@ -1,0 +1,22 @@
+:Base DsnSys.hlp>main
+:Title 実行時デザインシステム
+:Index 実行時デザインシステム =DsnSys.hlp
+1 はじめに
+2 紹介 =HID00000058
+2 Version １.x との互換性について =HID00000083
+2 インストール =HID00000084
+2 システムのクラス構成 =HID00000059
+2 システムの概略 =HID00000060
+1 クラス別ヘルプ
+2 TDsnStage =HID00000002
+2 Targets =HID00000069
+2 TDsnInspector =HID00000016
+2 TDsnPanel =HID00000036
+2 TDsnRegister =HID00000037
+2 TDsnSwitch =HID00000038
+1 サンプルの解説
+2 実行時デザインシステムの使用例 =HID00000049
+2 Sample.exeの使い方 =HID00000050
+2 Sample.exeの作り方 =HID00000051
+1 作者より
+2 作者より =HID00000081

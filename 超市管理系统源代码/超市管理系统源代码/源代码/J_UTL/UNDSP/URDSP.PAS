@@ -1,0 +1,428 @@
+unit URDSP;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ComCtrls, StdCtrls, ExtCtrls, Buttons, Spin, SPComm, Mask;
+
+type
+  TFRDSP = class(TForm)
+    PageControl: TPageControl;
+    PAGE_A: TTabSheet;
+    ED_PORT: TRadioGroup;
+    TabSheet2: TTabSheet;
+    P_TEST_TEXT: TBitBtn;
+    P_TEXT1: TEdit;
+    Label8: TLabel;
+    Label10: TLabel;
+    ED_DELAY: TSpinEdit;
+    Memo: TMemo;
+    Label17: TLabel;
+    Label1: TLabel;
+    P_TEXT2: TEdit;
+    P_TEST_CTRL: TBitBtn;
+    BTN_CLR: TButton;
+    ED_DSP: TRadioGroup;
+    ED_MODE1: TRadioGroup;
+    ED_MODE2: TRadioGroup;
+    ED_MODE3: TRadioGroup;
+    BTNQUT: TBitBtn;
+    BTNESC: TBitBtn;
+    Button1: TButton;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    procedure P_TEST_TEXTClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure P_TEST_CTRLClick(Sender: TObject);
+    procedure BTN_CLRClick(Sender: TObject);
+    procedure BTNQUTClick(Sender: TObject);
+    procedure BTNESCClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+   //系统设置
+   PROCEDURE DSP_CHANGE_VARIABLE;           // 当使用者改变设置时可更正变量值
+   PROCEDURE DSP_OPEN_PORT;                 // 开启机器要输出的Port
+   PROCEDURE DSP_READ_INI;                  // 读取上次的环境设置值
+   PROCEDURE DSP_WRITE_INI;                 // 将环境设置值存盘
+
+   //打印控制
+   PROCEDURE DSP_CTRL(EXPRESSION:STRING);            // 输出打印控制命令至发票机 - 含跳行
+   PROCEDURE DSP_CTRLX(EXPRESSION:STRING);           // 输出打印控制命令至发票机 - 含跳行
+   PROCEDURE DSP_TITLE;                              // 输出发票机打印控制的前导命令
+   PROCEDURE DSP_SETOVERWRITEMODE;
+   PROCEDURE DSP_SET_CMODE;
+   PROCEDURE DSP_CLR;
+   PROCEDURE DSP_POSITION(X,Y:INTEGER);
+   PROCEDURE DSP_TEXT(EXPRESSION:STRING);
+   PROCEDURE DSP_TEXT1(EXPRESSION,KIND:STRING);
+   PROCEDURE DSP_TEXT2(EXPRESSION,KIND:STRING);
+   PROCEDURE DSP_LINE1_TEXT(EXPRESSION:STRING);
+
+   PROCEDURE DSP_TEXT1GO(EXPRESSION,KIND:STRING);   //跑马灯
+
+   // 前台发票打印控制
+   PROCEDURE DISPLAY_DSP_TITLE  ;
+   PROCEDURE DISPLAY_DSP_CONTENT(T_BGENO,T_BGNAM,T_BGCNT,T_BGCOS,T_BGCOT,T_TOTAL:STRING);
+   PROCEDURE DISPLAY_DSP_TOTAL  (T_TOTAL:STRING);
+  
+var
+  FRDSP: TFRDSP;
+
+  // 设置用变量 - 暂存
+  DSP_OUT_PORT :STRING;
+  DSP_TF       :TEXTFILE;
+
+  // 设置用变量
+  DSP_DSP   : INTEGER;
+  DSP_PORT  : INTEGER;
+  DSP_MODE1 : INTEGER;
+  DSP_MODE2 : INTEGER;
+  DSP_MODE3 : INTEGER;
+  DSP_DELAY : INTEGER;
+
+  //计数器
+  DSP_COUNTER :INTEGER;
+
+
+
+implementation
+
+USES UN_UTL, FM_UTL, SYSINI;
+
+{$R *.DFM}
+
+PROCEDURE DSP_CHANGE_VARIABLE;           // 当使用者改变设置时可更正变量值
+BEGIN
+  DSP_DSP   := FRDSP.ED_DSP   .ItemIndex  ;
+  DSP_PORT  := FRDSP.ED_PORT  .ItemIndex  ;
+  DSP_MODE1 := FRDSP.ED_MODE1 .ItemIndex  ;
+  DSP_MODE2 := FRDSP.ED_MODE2 .ItemIndex  ;
+  DSP_MODE3 := FRDSP.ED_MODE3 .ItemIndex  ;
+  DSP_DELAY := FRDSP.ED_DELAY .value      ;
+END;
+
+PROCEDURE DSP_OPEN_PORT;
+VAR C : TCOMM;
+BEGIN
+  IF DSP_PORT = 0 THEN DSP_OUT_PORT := 'COM1';
+  IF DSP_PORT = 1 THEN DSP_OUT_PORT := 'COM2';
+  IF DSP_PORT = 2 THEN DSP_OUT_PORT := 'COM3';
+  IF DSP_PORT = 3 THEN DSP_OUT_PORT := 'COM4';
+  IF DSP_PORT = 4 THEN DSP_OUT_PORT := 'LPT1';
+  C          := TCOMM.Create(FRDSP);   // 使用内部式声明, 结束后自动清除资源
+  C.CommName := DSP_OUT_PORT;          // 先使用 RS232 组件, 将输出端口打开
+  C.StartComm;
+  C.StopComm;
+END;
+
+PROCEDURE DSP_READ_INI;
+BEGIN
+  IF FileExists(FILEPATH_DSP) = TRUE  THEN
+     BEGIN
+     DSP_DSP   := INI_LOAD_INT (FILEPATH_DSP,'DSP_DSP'       ,0);
+     DSP_PORT  := INI_LOAD_INT (FILEPATH_DSP,'DSP_PORT'      ,0);
+     DSP_MODE1 := INI_LOAD_INT (FILEPATH_DSP,'DSP_MODE1'     ,0);
+     DSP_MODE2 := INI_LOAD_INT (FILEPATH_DSP,'DSP_MODE2'     ,0);
+     DSP_MODE3 := INI_LOAD_INT (FILEPATH_DSP,'DSP_MODE3'     ,0);
+     DSP_DELAY := INI_LOAD_INT (FILEPATH_DSP,'DSP_DELAY'     ,0);
+     IF FormExists('FRDSP' )=TRUE THEN
+        BEGIN
+        FRDSP.ED_DSP   .ItemIndex := DSP_DSP   ;
+        FRDSP.ED_PORT  .ItemIndex := DSP_PORT  ;
+        FRDSP.ED_MODE1 .ItemIndex := DSP_MODE1 ;
+        FRDSP.ED_MODE2 .ItemIndex := DSP_MODE2 ;
+        FRDSP.ED_MODE3 .ItemIndex := DSP_MODE3 ;
+        FRDSP.ED_DELAY .value     := DSP_DELAY ;
+        END;
+     END;
+END;
+
+PROCEDURE DSP_WRITE_INI;
+BEGIN
+  IF FileExists(FILEPATH_DSP) = TRUE  THEN
+     BEGIN
+     FILE_REWRITE(FILEPATH_DSP);
+
+     IF FormExists('FRDSP' )=TRUE THEN DSP_CHANGE_VARIABLE;
+     INI_SAVE_INT (FILEPATH_DSP,'DSP_DSP'  , DSP_DSP   );
+     INI_SAVE_INT (FILEPATH_DSP,'DSP_PORT' , DSP_PORT  );
+     INI_SAVE_INT (FILEPATH_DSP,'DSP_MODE1', DSP_MODE1 );
+     INI_SAVE_INT (FILEPATH_DSP,'DSP_MODE2', DSP_MODE2 );
+     INI_SAVE_INT (FILEPATH_DSP,'DSP_MODE3', DSP_MODE3 );
+     INI_SAVE_INT (FILEPATH_DSP,'DSP_DELAY', DSP_DELAY );
+     END;
+END;
+
+PROCEDURE DSP_CTRL(EXPRESSION:STRING);
+BEGIN
+  COMPORT_OUTLN(DSP_OUT_PORT,EXPRESSION);
+  IF FormExists('FRDSP' )=TRUE THEN FRDSP.MEMO.Lines.Add( EXPRESSION );
+END;
+
+PROCEDURE DSP_CTRLX(EXPRESSION:STRING);
+BEGIN
+  COMPORT_OUTLN(DSP_OUT_PORT,EXPRESSION);
+  IF FormExists('FRDSP' )=TRUE THEN FRDSP.MEMO.Lines.Add( EXPRESSION );
+END;
+
+PROCEDURE DSP_SETOVERWRITEMODE;
+BEGIN
+  IF DSP_DSP =0 THEN EXIT;
+  IF DSP_DSP =1 THEN DSP_CTRL(CHR(27)+CHR(17));
+  IF DSP_DSP =2 THEN DSP_CTRL(CHR(27)+'EX4');
+END;
+
+PROCEDURE DSP_SET_CMODE;
+BEGIN
+  IF DSP_DSP =0 THEN EXIT;
+  IF DSP_DSP =1 THEN EXIT;
+  IF DSP_DSP =2 THEN
+     BEGIN
+     IF DSP_MODE1 =0 THEN EXIT;
+     IF DSP_MODE1 =1 THEN DSP_CTRL(CHR(27)+'%2');
+     END;
+END;
+
+PROCEDURE DSP_CLR;
+BEGIN
+  IF DSP_DSP =0 THEN EXIT;
+  IF DSP_DSP =1 THEN DSP_CTRL(CHR(27)+CHR(91)+CHR(72)+CHR(12));
+  IF DSP_DSP =2 THEN DSP_CTRL(CHR(27)+'EX4');
+  IF DSP_DSP =3 THEN DSP_CTRL(CHR(04)+CHR(01)+'C'+CHR(49)+CHR(88)+CHR(23) );
+  IF DSP_DSP =4 THEN DSP_CTRL(CHR(12) );
+END;
+
+PROCEDURE DSP_POSITION(X,Y:INTEGER);
+BEGIN
+  DSP_CTRL(CHR(27)+CHR(108)+INTTOSTR(X)+INTTOSTR(Y));
+END;
+
+
+PROCEDURE DSP_TITLE;
+BEGIN
+  DSP_OPEN_PORT;
+  
+  IF DSP_DSP =0 THEN EXIT;
+  IF DSP_DSP =1 THEN DSP_CTRL(CHR(27)+CHR(17) );
+  IF DSP_DSP =2 THEN DSP_CTRL(CHR(27)+'@');
+  IF DSP_DSP =4 THEN DSP_CTRL(CHR(27)+CHR(17) );
+
+  DSP_SETOVERWRITEMODE;
+  DSP_SET_CMODE;
+END;
+
+PROCEDURE DSP_TEXT(EXPRESSION:STRING);
+BEGIN
+  DSP_CTRL(EXPRESSION);
+END;
+
+PROCEDURE DSP_TEXT1(EXPRESSION,KIND:STRING);
+VAR STR:STRING;
+BEGIN
+  DELAY(DSP_DELAY);
+  
+  // STR := FILL_STR(' ',EXPRESSION,KIND,20);//到 HOME
+  IF DSP_DSP =4 THEN STR := CHR(27)+CHR(81)+CHR(65)+EXPRESSION;//到 HOME
+  DSP_CTRL(STR);
+END;
+
+PROCEDURE DSP_TEXT2(EXPRESSION,KIND:STRING);
+VAR STR:STRING;
+BEGIN
+  DELAY(DSP_DELAY);
+
+  // STR := FILL_STR(' ',EXPRESSION,KIND,20);//到 HOME
+  IF DSP_DSP =4 THEN STR := CHR(27)+CHR(81)+CHR(66)+EXPRESSION;//到 HOME
+  DSP_CTRL(STR);
+END;
+
+PROCEDURE DSP_LINE1_TEXT(EXPRESSION:STRING);
+VAR STR:STRING;
+BEGIN
+  DELAY(DSP_DELAY);
+  
+  STR := EXPRESSION;//到 HOME
+  DSP_CTRL(STR);
+  
+  IF DSP_DSP =2 THEN
+     BEGIN
+     IF DSP_MODE3 =0 THEN DSP_CTRL(CHR(27)+'EX0');
+     IF DSP_MODE3 =1 THEN DSP_CTRL(CHR(27)+'EX1');
+     END;
+END;
+
+PROCEDURE DSP_TEXT1GO(EXPRESSION,KIND:STRING);
+VAR N, I : INTEGER;
+BEGIN
+  DELAY(DSP_DELAY);
+
+  IF TEST_OPEN_FILE(DSP_OUT_PORT) = TRUE THEN
+     BEGIN
+     AssignFile(DSP_TF,DSP_OUT_PORT);   REWRITE(DSP_TF);
+
+     FOR N := 1 TO 20 DO
+         BEGIN
+         WRITE(DSP_TF,CHR(27)+CHR(91)+CHR(72));  //到 HOME
+         FOR I := 1 TO N DO  WRITE(DSP_TF,CHR(27)+CHR(91)+CHR(67));  //到 MOVE LEFT
+         WRITE(DSP_TF,EXPRESSION);
+         END;
+
+     WRITE(DSP_TF,CHR(27)+CHR(91)+CHR(72));  //到 HOME
+     WRITE(DSP_TF,FILL_STR(' ',EXPRESSION,KIND,N));
+     CloseFile(DSP_TF);
+     IF FormExists('FRDSP' )=TRUE THEN FRDSP.MEMO.Lines.Add( EXPRESSION );
+     END;
+END;
+
+procedure TFRDSP.FormCreate(Sender: TObject);
+begin
+  PAGE_A.SHOW;
+  DSP_COUNTER := 0;
+  DSP_OUT_PORT := 'COM1';
+  
+  FILEPATH_DSP := ExtractFilePath(Application.EXEName)+'\DSP.INI';
+  
+  IF FileExists(FILEPATH_DSP) = FALSE THEN
+     BEGIN
+     FILE_CREATE(FILEPATH_DSP);
+     DSP_WRITE_INI;
+     END ELSE BEGIN
+     DSP_READ_INI;
+     END;
+end;
+
+procedure TFRDSP.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DSP_WRITE_INI;
+  DSP_TITLE;
+end;
+
+procedure TFRDSP.P_TEST_TEXTClick(Sender: TObject);
+begin
+  DSP_CHANGE_VARIABLE;
+  DSP_TITLE;
+  DSP_TEXT(P_TEXT1.Text);
+end;
+
+procedure TFRDSP.BitBtn1Click(Sender: TObject);
+begin
+  DSP_CHANGE_VARIABLE;
+  DSP_TITLE;
+  DSP_TEXT1GO(P_TEXT1.Text,'R');
+end;
+
+procedure TFRDSP.BitBtn2Click(Sender: TObject);
+begin
+  DSP_CHANGE_VARIABLE;
+  DSP_TITLE;
+  DSP_TEXT1(P_TEXT1.Text,'R');
+end;
+
+procedure TFRDSP.BitBtn3Click(Sender: TObject);
+begin
+  DSP_CHANGE_VARIABLE;
+  DSP_TITLE;
+  DSP_TEXT2(P_TEXT1.Text,'R');
+end;
+
+
+procedure TFRDSP.P_TEST_CTRLClick(Sender: TObject);
+begin
+  DSP_CHANGE_VARIABLE;
+  DSP_TITLE;
+  //   DSP_TEXT2(P_TEXT2.Text,'R');
+     DSP_LINE1_TEXT(P_TEXT2.Text);
+end;
+
+procedure TFRDSP.BTN_CLRClick(Sender: TObject);
+begin
+  DSP_CHANGE_VARIABLE;
+  DSP_CLR;
+end;
+
+PROCEDURE DISPLAY_DSP_TITLE;
+BEGIN
+  IF DSP_DSP =0 THEN EXIT;
+END;
+
+
+PROCEDURE DISPLAY_DSP_CONTENT(T_BGENO,T_BGNAM,T_BGCNT,T_BGCOS,T_BGCOT,T_TOTAL:STRING);
+VAR J : INTEGER;
+    T_DSP_C1, T_DSP_C2, T_DSP_C3, T_DSP_C4, EXPRESS : STRING;
+BEGIN
+{  T_DSP_C1 := '';
+  IF DSP_C1.ItemIndex = 1 THEN T_DSP_C1 := T_BGENO ;
+  IF DSP_C1.ItemIndex = 2 THEN T_DSP_C1 := DB_QUERY_FIND_VALUE('BGDS','BGENO',T_BGENO,'BGID1');
+  IF DSP_C1.ItemIndex = 3 THEN T_DSP_C1 := T_BGNAM ;
+  IF DSP_C1.ItemIndex = 4 THEN T_DSP_C1 := DB_QUERY_FIND_VALUE('BGDS','BGENO',T_BGENO,'BGKIN');
+  IF DSP_C1.ItemIndex = 5 THEN T_DSP_C1 := T_BGCNT ;
+  IF DSP_C1.ItemIndex = 6 THEN T_DSP_C1 := T_BGCOS ;
+  IF DSP_C1.ItemIndex = 7 THEN T_DSP_C1 := T_BGCOT ;
+  T_DSP_C2 := '';
+  IF DSP_C2.ItemIndex = 1 THEN T_DSP_C2 := T_BGENO ;
+  IF DSP_C2.ItemIndex = 2 THEN T_DSP_C2 := DB_QUERY_FIND_VALUE('BGDS','BGENO',T_BGENO,'BGID1');
+  IF DSP_C2.ItemIndex = 3 THEN T_DSP_C2 := T_BGNAM ;
+  IF DSP_C2.ItemIndex = 4 THEN T_DSP_C2 := DB_QUERY_FIND_VALUE('BGDS','BGENO',T_BGENO,'BGKIN');
+  IF DSP_C2.ItemIndex = 5 THEN T_DSP_C2 := T_BGCNT ;
+  IF DSP_C2.ItemIndex = 6 THEN T_DSP_C2 := T_BGCOS ;
+  IF DSP_C2.ItemIndex = 7 THEN T_DSP_C2 := T_BGCOT ;
+  T_DSP_C3 := '';
+  IF DSP_C3.ItemIndex = 1 THEN T_DSP_C3 := T_BGENO ;
+  IF DSP_C3.ItemIndex = 2 THEN T_DSP_C3 := DB_QUERY_FIND_VALUE('BGDS','BGENO',T_BGENO,'BGID1');
+  IF DSP_C3.ItemIndex = 3 THEN T_DSP_C3 := T_BGNAM ;
+  IF DSP_C3.ItemIndex = 4 THEN T_DSP_C3 := DB_QUERY_FIND_VALUE('BGDS','BGENO',T_BGENO,'BGKIN');
+  IF DSP_C3.ItemIndex = 5 THEN T_DSP_C3 := T_BGCNT ;
+  IF DSP_C3.ItemIndex = 6 THEN T_DSP_C3 := T_BGCOS ;
+  IF DSP_C3.ItemIndex = 7 THEN T_DSP_C3 := T_BGCOT ;
+  T_DSP_C4 := DSP_C4.TEXT;
+
+  EXPRESS := COPY(T_DSP_C1,1,DSP_C10.Value)+ REPLICATE(' ',DSP_C10.Value-LENGTH(T_DSP_C1))+REPLICATE(' ',DSP_C11.Value)+
+             COPY(T_DSP_C2,1,DSP_C20.Value)+ REPLICATE(' ',DSP_C20.Value-LENGTH(T_DSP_C2))+REPLICATE(' ',DSP_C22.Value)+
+             REPLICATE(' ',DSP_C30.Value-LENGTH(T_DSP_C3+T_DSP_C4)) +COPY(T_DSP_C3,1,DSP_C30.Value)+
+             T_DSP_C4;
+  DSP_LINE1_TEXT(EXPRESS);
+
+  IF ED_MODE2.ItemIndex =0 THEN EXIT;
+  IF ED_MODE2.ItemIndex =1 THEN DSP_TEXT2('TOTAL:  '+T_TOTAL,'R');
+}  
+END;
+
+
+
+PROCEDURE DISPLAY_DSP_TOTAL(T_TOTAL:STRING);
+BEGIN
+  //DSP_LINE1_TEXT(DSP_E1.TEXT+REPLICATE(' ',20 - LENGTH(DSP_E1.TEXT) - LENGTH(T_TOTAL+DSP_E2.TEXT))+T_TOTAL+DSP_E2.TEXT);
+END;
+
+
+procedure TFRDSP.BTNQUTClick(Sender: TObject);
+begin
+  DSP_WRITE_INI;
+  CLOSE;
+end;
+
+procedure TFRDSP.BTNESCClick(Sender: TObject);
+begin
+  CLOSE;
+end;
+
+procedure TFRDSP.Button1Click(Sender: TObject);
+begin
+DSP_CTRL(CHR(27)+CHR(64));
+
+end;
+
+
+
+end.

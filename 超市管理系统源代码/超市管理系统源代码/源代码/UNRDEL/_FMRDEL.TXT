@@ -1,0 +1,180 @@
+  object LBRDENO: TLabel       
+    Left = 10                            
+    Top = 0             
+    Caption = '报废单号'
+  end                                    
+  object RDENO  : TDBEdit      
+    Left = 100                           
+    Top = 0             
+    DataField  = 'RDENO'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBBGENO: TLabel       
+    Left = 10                            
+    Top = 23             
+    Caption = '产品编号'
+  end                                    
+  object BGENO  : TDBEdit      
+    Left = 100                           
+    Top = 23             
+    DataField  = 'BGENO'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRDCNT: TLabel       
+    Left = 10                            
+    Top = 46             
+    Caption = '数量'
+  end                                    
+  object RDCNT  : TDBEdit      
+    Left = 100                           
+    Top = 46             
+    DataField  = 'RDCNT'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRBPST: TLabel       
+    Left = 10                            
+    Top = 69             
+    Caption = '库存位置'
+  end                                    
+  object RBPST  : TDBEdit      
+    Left = 100                           
+    Top = 69             
+    DataField  = 'RBPST'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRDREA: TLabel       
+    Left = 10                            
+    Top = 92             
+    Caption = '报废原因'
+  end                                    
+  object RDREA  : TDBEdit      
+    Left = 100                           
+    Top = 92             
+    DataField  = 'RDREA'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRDDAT: TLabel       
+    Left = 10                            
+    Top = 115             
+    Caption = '报废日期'
+  end                                    
+  object RDDAT  : TDBEdit      
+    Left = 100                           
+    Top = 115             
+    DataField  = 'RDDAT'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRDTME: TLabel       
+    Left = 10                            
+    Top = 138             
+    Caption = '报废时间'
+  end                                    
+  object RDTME  : TDBEdit      
+    Left = 100                           
+    Top = 138             
+    DataField  = 'RDTME'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBBNENO: TLabel       
+    Left = 10                            
+    Top = 161             
+    Caption = '申请人员'
+  end                                    
+  object BNENO  : TDBEdit      
+    Left = 100                           
+    Top = 161             
+    DataField  = 'BNENO'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRDMRK: TLabel       
+    Left = 10                            
+    Top = 184             
+    Caption = '报废备注'
+  end                                    
+  object RDMRK  : TDBEdit      
+    Left = 100                           
+    Top = 184             
+    DataField  = 'RDMRK'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object LBRDOUT: TLabel       
+    Left = 10                            
+    Top = 207             
+    Caption = '是否保存'
+  end                                    
+  object RDOUT  : TDBEdit      
+    Left = 100                           
+    Top = 207             
+    DataField  = 'RDOUT'
+    DataSource = FMRDELD.DSRDEL
+  end                                    
+  object DBGrid1: TDBGrid                
+    Left = 5
+    Top =  0
+    Width = 602
+    Height = 100
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+    Columns = <
+      item
+        FieldName = 'RDENO'
+        Title.Caption = '报废单号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'BGENO'
+        Title.Caption = '产品编号'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RDCNT'
+        Title.Caption = '数量'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RBPST'
+        Title.Caption = '库存位置'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RDREA'
+        Title.Caption = '报废原因'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RDDAT'
+        Title.Caption = '报废日期'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RDTME'
+        Title.Caption = '报废时间'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'BNENO'
+        Title.Caption = '申请人员'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RDMRK'
+        Title.Caption = '报废备注'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+      item
+        FieldName = 'RDOUT'
+        Title.Caption = '是否保存'
+        Title.Alignment = taCenter
+        Title.Color = clInfoBk
+      end
+>
+  end

@@ -1,0 +1,62 @@
+     FMRDELD.QRDEL.SQL.CLEAR;
+     FMRDELD.QRDEL.SQL.ADD('SELECT *  ');
+     FMRDELD.QRDEL.SQL.ADD('FROM RDEL ');
+     FMRDELD.QRDEL.SQL.ADD('ORDER BY XXXXXXX ');
+-----------------                -
+-----------------                -
+     FMRDELD.URDEL.InsertSQL.CLEAR;
+     FMRDELD.URDEL.InsertSQL.Add('INSERT INTO RDEL ');
+     FMRDELD.URDEL.InsertSQL.Add(' ( RDENO, BGENO, RDCNT, RBPST, RDREA, RDDAT, RDTME, BNENO, RDMRK, RDOUT, ) ');
+     FMRDELD.URDEL.InsertSQL.Add('VALUES ');
+     FMRDELD.URDEL.InsertSQL.Add(' (:RDENO,:BGENO,:RDCNT,:RBPST,:RDREA,:RDDAT,:RDTME,:BNENO,:RDMRK,:RDOUT, ) ');
+                             
+-----------------UPDATE TEXT
+     FMRDELD.URDEL.ModifySQL.CLEAR;
+     FMRDELD.URDEL.ModifySQL.Add('UPDATE RDEL ');
+     FMRDELD.URDEL.ModifySQL.Add('SET ');
+     FMRDELD.URDEL.ModifySQL.Add('RDENO = :RDENO ,');
+     FMRDELD.URDEL.ModifySQL.Add('BGENO = :BGENO ,');
+     FMRDELD.URDEL.ModifySQL.Add('RDCNT = :RDCNT ,');
+     FMRDELD.URDEL.ModifySQL.Add('RBPST = :RBPST ,');
+     FMRDELD.URDEL.ModifySQL.Add('RDREA = :RDREA ,');
+     FMRDELD.URDEL.ModifySQL.Add('RDDAT = :RDDAT ,');
+     FMRDELD.URDEL.ModifySQL.Add('RDTME = :RDTME ,');
+     FMRDELD.URDEL.ModifySQL.Add('BNENO = :BNENO ,');
+     FMRDELD.URDEL.ModifySQL.Add('RDMRK = :RDMRK ,');
+     FMRDELD.URDEL.ModifySQL.Add('RDOUT = :RDOUT ,');
+
+----------------- EDIT ENABLE
+RDENO.Enabled := TRUE;
+BGENO.Enabled := TRUE;
+RDCNT.Enabled := TRUE;
+RBPST.Enabled := TRUE;
+RDREA.Enabled := TRUE;
+RDDAT.Enabled := TRUE;
+RDTME.Enabled := TRUE;
+BNENO.Enabled := TRUE;
+RDMRK.Enabled := TRUE;
+RDOUT.Enabled := TRUE;
+
+-----------------
+RDENO.Enabled := FALSE;
+BGENO.Enabled := FALSE;
+RDCNT.Enabled := FALSE;
+RBPST.Enabled := FALSE;
+RDREA.Enabled := FALSE;
+RDDAT.Enabled := FALSE;
+RDTME.Enabled := FALSE;
+BNENO.Enabled := FALSE;
+RDMRK.Enabled := FALSE;
+RDOUT.Enabled := FALSE;
+
+======================================
+    QRDELRDENO.VALUE := ''  ;
+    QRDELBGENO.VALUE := ''  ;
+    QRDELRDCNT.VALUE := 0   ;
+    QRDELRBPST.VALUE := ''  ;
+    QRDELRDREA.VALUE := ''  ;
+    QRDELRDDAT.VALUE := DATE;
+    QRDELRDTME.VALUE := ''  ;
+    QRDELBNENO.VALUE := ''  ;
+    QRDELRDMRK.VALUE := ''  ;
+    QRDELRDOUT.VALUE := FALSE;

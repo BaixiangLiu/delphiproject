@@ -1,0 +1,6 @@
+    LBBMENO: TLabel; 
+    BMENO  : TDBEdit;
+    LBCWGET: TLabel; 
+    CWGET  : TDBEdit;
+    LBCWGDS: TLabel; 
+    CWGDS  : TDBEdit;

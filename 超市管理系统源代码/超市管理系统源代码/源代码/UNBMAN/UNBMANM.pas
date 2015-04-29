@@ -1,0 +1,420 @@
+unit UNBMANM;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, JLOOKUP, ExtCtrls, Db, DBTables;
+
+type
+  TFMBMANM = class(TForm)
+    Panel1: TPanel;
+    BNENO: TLabel;
+    GroupBox1: TGroupBox;
+    ED_BMAN_OPEN: TCheckBox;
+    ED_BMAN_INS: TCheckBox;
+    ED_BMAN_UPD: TCheckBox;
+    ED_BMAN_DEL: TCheckBox;
+    ED_BMAN_SEA: TCheckBox;
+    ED_BMAN_PRN: TCheckBox;
+    GroupBox2: TGroupBox;
+    ED_BMEM_OPEN: TCheckBox;
+    ED_BMEM_INS: TCheckBox;
+    ED_BMEM_UPD: TCheckBox;
+    ED_BMEM_DEL: TCheckBox;
+    ED_BMEM_SEA: TCheckBox;
+    ED_BMEM_PRN: TCheckBox;
+    GroupBox3: TGroupBox;
+    ED_BGDS_OPEN: TCheckBox;
+    ED_BGDS_INS: TCheckBox;
+    ED_BGDS_UPD: TCheckBox;
+    ED_BGDS_DEL: TCheckBox;
+    ED_BGDS_SEA: TCheckBox;
+    ED_BGDS_PRN: TCheckBox;
+    GroupBox4: TGroupBox;
+    ED_BSUP_OPEN: TCheckBox;
+    ED_BSUP_INS: TCheckBox;
+    ED_BSUP_UPD: TCheckBox;
+    ED_BSUP_DEL: TCheckBox;
+    ED_BSUP_SEA: TCheckBox;
+    ED_BSUP_PRN: TCheckBox;
+    GroupBox5: TGroupBox;
+    ED_BCST_OPEN: TCheckBox;
+    ED_BCST_INS: TCheckBox;
+    ED_BCST_UPD: TCheckBox;
+    ED_BCST_DEL: TCheckBox;
+    ED_BCST_SEA: TCheckBox;
+    ED_BCST_PRN: TCheckBox;
+    BNNAM: TLabel;
+    GroupBox6: TGroupBox;
+    ED_SYS_POS: TCheckBox;
+    ED_SYS_POSA: TCheckBox;
+    ED_SET_MAINS: TCheckBox;
+    ED_SET_HARD: TCheckBox;
+    ED_SET_PMS: TCheckBox;
+    ED_SET_PASSWD: TCheckBox;
+    GroupBox7: TGroupBox;
+    ED_POSM_OPEN: TCheckBox;
+    ED_POSM_INS: TCheckBox;
+    ED_POSM_UPD: TCheckBox;
+    ED_POSM_DEL: TCheckBox;
+    ED_POSM_SEA: TCheckBox;
+    ED_POSM_PRN: TCheckBox;
+    GroupBox8: TGroupBox;
+    ED_POSN_OPEN: TCheckBox;
+    ED_POSN_INS: TCheckBox;
+    ED_POSN_UPD: TCheckBox;
+    ED_POSN_DEL: TCheckBox;
+    ED_POSN_SEA: TCheckBox;
+    ED_POSN_PRN: TCheckBox;
+    GroupBox9: TGroupBox;
+    ED_RCIN_OPEN: TCheckBox;
+    ED_RCIN_INS: TCheckBox;
+    ED_RCIN_UPD: TCheckBox;
+    ED_RCIN_DEL: TCheckBox;
+    ED_RCIN_SEA: TCheckBox;
+    ED_RCIN_PRN: TCheckBox;
+    GroupBox10: TGroupBox;
+    ED_RCJN_OPEN: TCheckBox;
+    ED_RCJN_INS: TCheckBox;
+    ED_RCJN_UPD: TCheckBox;
+    ED_RCJN_DEL: TCheckBox;
+    ED_RCJN_SEA: TCheckBox;
+    ED_RCJN_PRN: TCheckBox;
+    GroupBox11: TGroupBox;
+    ED_RPT_POSD: TCheckBox;
+    ED_RPT_POS1: TCheckBox;
+    ED_RPT_POS2: TCheckBox;
+    ED_RPT_POS3: TCheckBox;
+    ED_RPT_POS5: TCheckBox;
+    ED_RPT_POS6: TCheckBox;
+    ED_RPT_POS7: TCheckBox;
+    ED_RPT_TOP1: TCheckBox;
+    ED_RPT_TOP2: TCheckBox;
+    ED_RPT_TOP3: TCheckBox;
+    ED_RPT_POS667: TCheckBox;
+    ED_RPT_LOG: TCheckBox;
+    ED_SET_LABEL: TCheckBox;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BTNQUT: TBitBtn;
+    BTNCAL: TBitBtn;
+    GroupBox12: TGroupBox;
+    ED_IVTX_OPEN: TCheckBox;
+    procedure BTNQUTClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure BTNCALClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+  private
+    { Private declarations }
+    PROCEDURE CHECK_ALL(CHECKED:BOOLEAN);
+  public
+    { Public declarations }
+    PMS_BNENO : STRING;
+    PMS_BNNAM : STRING;
+    PROCEDURE LOAD_BMAN_PMS;
+  end;
+
+
+
+
+
+
+var
+  FMBMANM: TFMBMANM;
+
+implementation
+
+USES UN_UTL, MAINU;
+
+{$R *.DFM}
+
+PROCEDURE TFMBMANM.CHECK_ALL(CHECKED:BOOLEAN);
+BEGIN
+  ED_SYS_POS   .Checked := CHECKED;
+  ED_SYS_POSA  .Checked := CHECKED;
+  ED_SET_MAINS .Checked := CHECKED;
+  ED_SET_PMS   .Checked := CHECKED;
+  ED_SET_PASSWD.Checked := CHECKED;
+  ED_SET_HARD  .Checked := CHECKED;
+  ED_SET_LABEL .Checked := CHECKED;
+
+  ED_BMAN_OPEN .Checked := CHECKED;
+  ED_BMAN_INS  .Checked := CHECKED;
+  ED_BMAN_UPD  .Checked := CHECKED;
+  ED_BMAN_DEL  .Checked := CHECKED;
+  ED_BMAN_SEA  .Checked := CHECKED;
+  ED_BMAN_PRN  .Checked := CHECKED;
+  
+  ED_BMEM_OPEN .Checked := CHECKED;
+  ED_BMEM_INS  .Checked := CHECKED;
+  ED_BMEM_UPD  .Checked := CHECKED;
+  ED_BMEM_DEL  .Checked := CHECKED;
+  ED_BMEM_SEA  .Checked := CHECKED;
+  ED_BMEM_PRN  .Checked := CHECKED;
+  
+  ED_BGDS_OPEN .Checked := CHECKED;
+  ED_BGDS_INS  .Checked := CHECKED;
+  ED_BGDS_UPD  .Checked := CHECKED;
+  ED_BGDS_DEL  .Checked := CHECKED;
+  ED_BGDS_SEA  .Checked := CHECKED;
+  ED_BGDS_PRN  .Checked := CHECKED;
+  
+  ED_POSM_OPEN .Checked := CHECKED;
+  ED_POSM_INS  .Checked := CHECKED;
+  ED_POSM_UPD  .Checked := CHECKED;
+  ED_POSM_DEL  .Checked := CHECKED;
+  ED_POSM_SEA  .Checked := CHECKED;
+  ED_POSM_PRN  .Checked := CHECKED;
+  
+  ED_POSN_OPEN .Checked := CHECKED;
+  ED_POSN_INS  .Checked := CHECKED;
+  ED_POSN_UPD  .Checked := CHECKED;
+  ED_POSN_DEL  .Checked := CHECKED;
+  ED_POSN_SEA  .Checked := CHECKED;
+  ED_POSN_PRN  .Checked := CHECKED;
+
+  ED_BSUP_OPEN .Checked := CHECKED;
+  ED_BSUP_INS  .Checked := CHECKED;
+  ED_BSUP_UPD  .Checked := CHECKED;
+  ED_BSUP_DEL  .Checked := CHECKED;
+  ED_BSUP_SEA  .Checked := CHECKED;
+  ED_BSUP_PRN  .Checked := CHECKED;
+  
+  ED_BCST_OPEN .Checked := CHECKED;
+  ED_BCST_INS  .Checked := CHECKED;
+  ED_BCST_UPD  .Checked := CHECKED;
+  ED_BCST_DEL  .Checked := CHECKED;
+  ED_BCST_SEA  .Checked := CHECKED;
+  ED_BCST_PRN  .Checked := CHECKED;
+  
+  ED_RCIN_OPEN .Checked := CHECKED;
+  ED_RCIN_INS  .Checked := CHECKED;
+  ED_RCIN_UPD  .Checked := CHECKED;
+  ED_RCIN_DEL  .Checked := CHECKED;
+  ED_RCIN_SEA  .Checked := CHECKED;
+  ED_RCIN_PRN  .Checked := CHECKED;
+  
+  ED_RCJN_OPEN .Checked := CHECKED;
+  ED_RCJN_INS  .Checked := CHECKED;
+  ED_RCJN_UPD  .Checked := CHECKED;
+  ED_RCJN_DEL  .Checked := CHECKED;
+  ED_RCJN_SEA  .Checked := CHECKED;
+  ED_RCJN_PRN  .Checked := CHECKED;
+  
+  ED_RPT_POSD  .Checked := CHECKED;
+  ED_RPT_POS1  .Checked := CHECKED;
+  ED_RPT_POS2  .Checked := CHECKED;
+  ED_RPT_POS3  .Checked := CHECKED;
+  ED_RPT_POS5  .Checked := CHECKED;
+  ED_RPT_POS6  .Checked := CHECKED;
+  ED_RPT_POS7  .Checked := CHECKED;
+  ED_RPT_TOP1  .Checked := CHECKED;
+  ED_RPT_TOP2  .Checked := CHECKED;
+  ED_RPT_TOP3  .Checked := CHECKED;
+  ED_RPT_LOG   .Checked := CHECKED;
+END;
+
+PROCEDURE TFMBMANM.LOAD_BMAN_PMS;
+begin
+  ED_SYS_POS   .Checked := READ_BMAN_PMS(PMS_BNENO,'SYS_POS');
+  ED_SYS_POSA  .Checked := READ_BMAN_PMS(PMS_BNENO,'SYS_POSA');
+  ED_SET_MAINS .Checked := READ_BMAN_PMS(PMS_BNENO,'SET_MAINS');
+  ED_SET_PMS   .Checked := READ_BMAN_PMS(PMS_BNENO,'SET_PMS');
+  ED_SET_PASSWD.Checked := READ_BMAN_PMS(PMS_BNENO,'SET_PASSWD');
+  ED_SET_HARD  .Checked := READ_BMAN_PMS(PMS_BNENO,'SET_HARD');
+  ED_SET_LABEL .Checked := READ_BMAN_PMS(PMS_BNENO,'SET_LABEL');
+
+  ED_BMAN_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'BMAN_OPEN');
+  ED_BMAN_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'BMAN_INS' );
+  ED_BMAN_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'BMAN_UPD' );
+  ED_BMAN_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'BMAN_DEL' );
+  ED_BMAN_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'BMAN_SEA' );
+  ED_BMAN_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'BMAN_PRN' );
+  
+  ED_BMEM_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'BMEM_OPEN');
+  ED_BMEM_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'BMEM_INS' );
+  ED_BMEM_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'BMEM_UPD' );
+  ED_BMEM_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'BMEM_DEL' );
+  ED_BMEM_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'BMEM_SEA' );
+  ED_BMEM_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'BMEM_PRN' );
+  
+  ED_BGDS_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'BGDS_OPEN');
+  ED_BGDS_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'BGDS_INS' );
+  ED_BGDS_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'BGDS_UPD' );
+  ED_BGDS_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'BGDS_DEL' );
+  ED_BGDS_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'BGDS_SEA' );
+  ED_BGDS_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'BGDS_PRN' );
+
+  ED_POSM_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'POSM_OPEN');
+  ED_POSM_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'POSM_INS' );
+  ED_POSM_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'POSM_UPD' );
+  ED_POSM_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'POSM_DEL' );
+  ED_POSM_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'POSM_SEA' );
+  ED_POSM_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'POSM_PRN' );
+  
+  ED_POSN_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'POSN_OPEN');
+  ED_POSN_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'POSN_INS' );
+  ED_POSN_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'POSN_UPD' );
+  ED_POSN_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'POSN_DEL' );
+  ED_POSN_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'POSN_SEA' );
+  ED_POSN_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'POSN_PRN' );
+  
+  ED_BSUP_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'BSUP_OPEN');
+  ED_BSUP_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'BSUP_INS' );
+  ED_BSUP_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'BSUP_UPD' );
+  ED_BSUP_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'BSUP_DEL' );
+  ED_BSUP_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'BSUP_SEA' );
+  ED_BSUP_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'BSUP_PRN' );
+  
+  ED_BCST_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'BCST_OPEN');
+  ED_BCST_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'BCST_INS' );
+  ED_BCST_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'BCST_UPD' );
+  ED_BCST_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'BCST_DEL' );
+  ED_BCST_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'BCST_SEA' );
+  ED_BCST_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'BCST_PRN' );
+  
+  ED_RCIN_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'RCIN_OPEN');
+  ED_RCIN_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'RCIN_INS' );
+  ED_RCIN_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'RCIN_UPD' );
+  ED_RCIN_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'RCIN_DEL' );
+  ED_RCIN_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'RCIN_SEA' );
+  ED_RCIN_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'RCIN_PRN' );
+
+  ED_RCJN_OPEN.Checked := READ_BMAN_PMS(PMS_BNENO,'RCJN_OPEN');
+  ED_RCJN_INS .Checked := READ_BMAN_PMS(PMS_BNENO,'RCJN_INS' );
+  ED_RCJN_UPD .Checked := READ_BMAN_PMS(PMS_BNENO,'RCJN_UPD' );
+  ED_RCJN_DEL .Checked := READ_BMAN_PMS(PMS_BNENO,'RCJN_DEL' );
+  ED_RCJN_SEA .Checked := READ_BMAN_PMS(PMS_BNENO,'RCJN_SEA' );
+  ED_RCJN_PRN .Checked := READ_BMAN_PMS(PMS_BNENO,'RCJN_PRN' );
+
+  ED_RPT_POSD .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POSD' );
+  ED_RPT_POS1 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POS1' );
+  ED_RPT_POS2 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POS2' );
+  ED_RPT_POS3 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POS3' );
+  ED_RPT_POS5 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POS5' );
+  ED_RPT_POS6 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POS6' );
+  ED_RPT_POS7 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_POS7' );
+  ED_RPT_TOP1 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_TOP1' );
+  ED_RPT_TOP2 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_TOP2' );
+  ED_RPT_TOP3 .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_TOP3' );
+  ED_RPT_LOG  .Checked := READ_BMAN_PMS(PMS_BNENO,'RPT_LOG' );
+end;
+
+procedure TFMBMANM.BTNQUTClick(Sender: TObject);
+begin
+  WRITE_BMAN_PMS(PMS_BNENO,'SYS_POS'   ,ED_SYS_POS   .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'SYS_POSA'  ,ED_SYS_POSA  .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'SET_MAINS' ,ED_SET_MAINS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'SET_PMS'   ,ED_SET_PMS   .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'SET_PASSWD',ED_SET_PASSWD.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'SET_HARD'  ,ED_SET_HARD  .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'SET_LABEL' ,ED_SET_LABEL .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'BMAN_OPEN',ED_BMAN_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMAN_INS' ,ED_BMAN_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMAN_UPD' ,ED_BMAN_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMAN_DEL' ,ED_BMAN_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMAN_SEA' ,ED_BMAN_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMAN_PRN' ,ED_BMAN_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'BMEM_OPEN',ED_BMEM_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMEM_INS' ,ED_BMEM_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMEM_UPD' ,ED_BMEM_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMEM_DEL' ,ED_BMEM_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMEM_SEA' ,ED_BMEM_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BMEM_PRN' ,ED_BMEM_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'BGDS_OPEN',ED_BGDS_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BGDS_INS' ,ED_BGDS_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BGDS_UPD' ,ED_BGDS_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BGDS_DEL' ,ED_BGDS_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BGDS_SEA' ,ED_BGDS_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BGDS_PRN' ,ED_BGDS_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'POSM_OPEN',ED_POSM_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSM_INS' ,ED_POSM_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSM_UPD' ,ED_POSM_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSM_DEL' ,ED_POSM_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSM_SEA' ,ED_POSM_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSM_PRN' ,ED_POSM_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'POSN_OPEN',ED_POSN_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSN_INS' ,ED_POSN_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSN_UPD' ,ED_POSN_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSN_DEL' ,ED_POSN_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSN_SEA' ,ED_POSN_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'POSN_PRN' ,ED_POSN_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'BSUP_OPEN',ED_BSUP_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BSUP_INS' ,ED_BSUP_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BSUP_UPD' ,ED_BSUP_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BSUP_DEL' ,ED_BSUP_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BSUP_SEA' ,ED_BSUP_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BSUP_PRN' ,ED_BSUP_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'BCST_OPEN',ED_BCST_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BCST_INS' ,ED_BCST_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BCST_UPD' ,ED_BCST_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BCST_DEL' ,ED_BCST_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BCST_SEA' ,ED_BCST_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'BCST_PRN' ,ED_BCST_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'RCIN_OPEN',ED_RCIN_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCIN_INS' ,ED_RCIN_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCIN_UPD' ,ED_RCIN_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCIN_DEL' ,ED_RCIN_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCIN_SEA' ,ED_RCIN_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCIN_PRN' ,ED_RCIN_PRN .Checked);
+  
+  WRITE_BMAN_PMS(PMS_BNENO,'RCJN_OPEN',ED_RCJN_OPEN.Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCJN_INS' ,ED_RCJN_INS .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCJN_UPD' ,ED_RCJN_UPD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCJN_DEL' ,ED_RCJN_DEL .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCJN_SEA' ,ED_RCJN_SEA .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RCJN_PRN' ,ED_RCJN_PRN .Checked);
+
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POSD', ED_RPT_POSD .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POS1', ED_RPT_POS1 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POS2', ED_RPT_POS2 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POS3', ED_RPT_POS3 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POS5', ED_RPT_POS5 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POS6', ED_RPT_POS6 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_POS7', ED_RPT_POS7 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_TOP1', ED_RPT_TOP1 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_TOP2', ED_RPT_TOP2 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_TOP3', ED_RPT_TOP3 .Checked);
+  WRITE_BMAN_PMS(PMS_BNENO,'RPT_LOG' , ED_RPT_LOG  .Checked);
+
+  CLOSE;
+end;
+
+procedure TFMBMANM.FormShow(Sender: TObject);
+begin
+  BNENO.Caption := PMS_BNENO;
+  BNNAM.Caption := PMS_BNNAM;
+end;
+
+procedure TFMBMANM.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FMBMANM.Release;
+end;
+
+procedure TFMBMANM.BTNCALClick(Sender: TObject);
+begin
+  CLOSE;
+end;
+
+procedure TFMBMANM.BitBtn1Click(Sender: TObject);
+begin
+  CHECK_ALL(TRUE);
+end;
+
+procedure TFMBMANM.BitBtn2Click(Sender: TObject);
+begin
+  CHECK_ALL(FALSE);
+end;
+
+end.

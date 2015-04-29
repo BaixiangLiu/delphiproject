@@ -1,0 +1,481 @@
+unit URINVOICE;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ComCtrls, StdCtrls, ExtCtrls, Buttons, Spin, SPComm, Mask, Menus;
+
+type
+  TFRINVOICE = class(TForm)
+    PageControl: TPageControl;
+    PAGE_A: TTabSheet;
+    TabSheet2: TTabSheet;
+    P_TEST_TEXT: TBitBtn;
+    Comm1: TComm;
+    P_TEXT: TEdit;
+    Label8: TLabel;
+    BTN_XF: TBitBtn;
+    Memo: TMemo;
+    Label17: TLabel;
+    BTN_XG: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BTN_XB: TBitBtn;
+    BTN_CASHBOX: TButton;
+    Label2: TLabel;
+    P_CTRL: TEdit;
+    BitBtn6: TBitBtn;
+    Comm2: TComm;
+    GroupBox1: TGroupBox;
+    CD_PORT: TRadioGroup;
+    CD_CASH: TRadioGroup;
+    GroupBox2: TGroupBox;
+    Label10: TLabel;
+    Label3: TLabel;
+    ED_PORT: TRadioGroup;
+    ED_DELAY: TSpinEdit;
+    ED_LPTVALUE: TEdit;
+    Label1: TLabel;
+    Label4: TLabel;
+    ED_MAXROW: TSpinEdit;
+    ED_LPTADDR: TEdit;
+    ED_PRINTER: TRadioGroup;
+    BTNCASHBOXTEST: TButton;
+    Panel1: TPanel;
+    Label5: TLabel;
+    CD_INTTIME: TSpinEdit;
+    BTNESC: TBitBtn;
+    BTNQUT: TBitBtn;
+    MainMenu1: TMainMenu;
+    MenuItem1: TMenuItem;
+    procedure P_TEST_TEXTClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure BTN_XFClick(Sender: TObject);
+    procedure BTN_XGClick(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure BTN_XBClick(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BTN_CASHBOXClick(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure BTNCASHBOXTESTClick(Sender: TObject);
+    procedure CD_CASHClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BTNQUTClick(Sender: TObject);
+    procedure BTNESCClick(Sender: TObject);
+    procedure ED_PRINTERClick(Sender: TObject);
+    procedure ED_DELAYChange(Sender: TObject);
+    procedure ED_PORTClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+   // 系统设置
+   PROCEDURE INVOICE_CHANGE_VARIABLE;   // 当使用者改变设置时可更正变量值
+   PROCEDURE INVOICE_OPEN_PORT;         // 打开机器要输出的Port
+   PROCEDURE INVOICE_READ_INI;          // 读取上次的环境设置值
+   PROCEDURE INVOICE_WRITE_INI;         // 将环境设置值存盘
+
+   // 打印控制
+   PROCEDURE INVOICE_IV_TITLE;                       // 输出发票机打印前导控制命令
+   PROCEDURE INVOICE_IV_TEXT(EXPRESSION:STRING);     // 输出文字至发票机   - 含跳行
+   PROCEDURE INVOICE_IV_CTRL(EXPRESSION:STRING);     // 输出打印控制命令至发票机 - 含跳行
+   PROCEDURE INVOICE_IV_CTRLX(EXPRESSION:STRING);    // 输出打印控制命令至发票机 - 不含跳行
+
+   // 前台发票打印控制
+   PROCEDURE INVOICE_IV_INV_TEXT(EXPRESSION:STRING);        // 前台发票, 单行文字
+   PROCEDURE INVOICE_IV_INV_LINEFEED;                       // 前台发票, 空出一行(跳行)
+   PROCEDURE INVOICE_IV_PAGEFEED;                           // 前台发票, 跳页, 含盖章
+   PROCEDURE INVOICE_IV_LEFTLINE_TEXT(EXPRESSION:STRING);   // 前台发票, 只打印收执联(二联发票机)
+
+   // 其它控制
+   PROCEDURE INVOICE_STAMPING;     //盖印章
+   PROCEDURE INVOICE_CUT_PAPER;    //切纸
+   PROCEDURE INVOICE_OPEN_CASHBOX; //打开钱箱
+
+
+
+var
+  FRINVOICE: TFRINVOICE;
+
+  // 设置用变量 - 暂存
+  INVOICE_OUT_PORT    :STRING;        // 输出的连接口
+  INVOICE_TF          :TEXTFILE;      // 存盘时的INI 声明
+
+  // 设置用变量
+  INVOICE_PRINTER     :INTEGER;       // 打印机种类
+  INVOICE_PORT        :INTEGER;       // 输出的连接口
+  INVOICE_DELAY       :STRING;        // 输出时的延迟值
+  INVOICE_MAXROW      :STRING;        // 发票可打印的最大行数
+  INVOICE_LPTVALUE    :STRING;        // 检查 LPT 时,是否有接发票机
+  INVOICE_LPTADDR     :STRING;        // 检查 LPT 时,是否有接发票机
+  CASHDRAWER_CASH     :INTEGER;       // 钱箱的种类
+  CASHDRAWER_PORT     :INTEGER;       // 钱箱输出的连接口
+  CASHDRAWER_INTTIME  :INTEGER;       // 接RS232的钱箱输出时触发次数
+
+  //计数器  - 暂存
+  INVOICE_COUNTER     :INTEGER;       // 发票打印时,记录已打印几行
+  INVOICE_FIRST_PRINT :BOOLEAN;       // 发票机是否第一次打印
+
+
+implementation
+
+USES UN_UTL, FM_UTL, SYSINI;
+
+{$R *.DFM}
+
+PROCEDURE INVOICE_CHANGE_VARIABLE;
+BEGIN
+  INVOICE_PRINTER     := FRINVOICE.ED_PRINTER .ItemIndex;
+  INVOICE_PORT        := FRINVOICE.ED_PORT    .ItemIndex;
+  INVOICE_DELAY       := FRINVOICE.ED_DELAY   .TEXT;
+  INVOICE_MAXROW      := FRINVOICE.ED_MAXROW  .TEXT;
+  INVOICE_LPTVALUE    := FRINVOICE.ED_LPTVALUE.TEXT;
+  INVOICE_LPTADDR     := FRINVOICE.ED_LPTADDR .TEXT;
+  CASHDRAWER_CASH     := FRINVOICE.CD_CASH    .ItemIndex;
+  CASHDRAWER_PORT     := FRINVOICE.CD_PORT    .ItemIndex;
+  CASHDRAWER_INTTIME  := FRINVOICE.CD_INTTIME .VALUE ;
+  INVOICE_FIRST_PRINT := FALSE;
+END;
+
+PROCEDURE INVOICE_OPEN_PORT;
+VAR C : TCOMM;
+BEGIN
+  IF INVOICE_PORT = 0 THEN INVOICE_OUT_PORT := 'COM1';
+  IF INVOICE_PORT = 1 THEN INVOICE_OUT_PORT := 'COM2';
+  IF INVOICE_PORT = 2 THEN INVOICE_OUT_PORT := 'COM3';
+  IF INVOICE_PORT = 3 THEN INVOICE_OUT_PORT := 'COM4';
+  IF INVOICE_PORT = 4 THEN INVOICE_OUT_PORT := 'LPT1';
+  C          := TCOMM.Create(FRINVOICE);   // 使用内部式声明, 结束后自动清除资源
+  C.CommName := INVOICE_OUT_PORT;          // 先使用 RS232 组件, 将输出端口开通
+  C.StartComm;
+  C.StopComm;
+END;
+
+PROCEDURE INVOICE_READ_INI;
+BEGIN
+  IF FileExists(FILEPATH_INVOICE) = TRUE  THEN
+     BEGIN
+     INVOICE_PRINTER     := INI_LOAD_INT (FILEPATH_INVOICE,'INVOICE_PRINTER'    ,0    );
+     INVOICE_PORT        := INI_LOAD_INT (FILEPATH_INVOICE,'INVOICE_PORT'       ,0    );
+     INVOICE_DELAY       := INI_LOAD_STR (FILEPATH_INVOICE,'INVOICE_DELAY'      ,'100');
+     INVOICE_MAXROW      := INI_LOAD_STR (FILEPATH_INVOICE,'INVOICE_MAXROW'     ,'20' );
+     INVOICE_LPTVALUE    := INI_LOAD_STR (FILEPATH_INVOICE,'INVOICE_LPTVALUE'   ,'223');
+     INVOICE_LPTADDR     := INI_LOAD_STR (FILEPATH_INVOICE,'INVOICE_LPTADDR'    ,'88' );
+     CASHDRAWER_CASH     := INI_LOAD_INT (FILEPATH_INVOICE,'CASHDRAWER_CASH'    ,0    );
+     CASHDRAWER_PORT     := INI_LOAD_INT (FILEPATH_INVOICE,'CASHDRAWER_PORT'    ,0    );
+     CASHDRAWER_INTTIME  := INI_LOAD_INT (FILEPATH_INVOICE,'CASHDRAWER_INTTIME' ,0    );
+     IF FormExists('FRINVOICE' )=TRUE THEN
+        BEGIN
+        FRINVOICE.ED_PRINTER .ItemIndex := INVOICE_PRINTER   ;
+        FRINVOICE.ED_PORT    .ItemIndex := INVOICE_PORT      ;
+        FRINVOICE.ED_DELAY   .Text      := INVOICE_DELAY     ;
+        FRINVOICE.ED_MAXROW  .Text      := INVOICE_MAXROW    ;
+        FRINVOICE.ED_LPTVALUE.Text      := INVOICE_LPTVALUE  ;
+        FRINVOICE.ED_LPTADDR .Text      := INVOICE_LPTADDR   ;
+        FRINVOICE.CD_CASH    .ItemIndex := CASHDRAWER_CASH   ;
+        FRINVOICE.CD_PORT    .ItemIndex := CASHDRAWER_PORT   ;
+        FRINVOICE.CD_INTTIME .VALUE     := CASHDRAWER_INTTIME;
+        END;
+     END;
+END;
+
+PROCEDURE INVOICE_WRITE_INI;
+BEGIN
+  IF FileExists(FILEPATH_INVOICE) = TRUE  THEN
+     BEGIN
+     FILE_REWRITE(FILEPATH_INVOICE);
+
+     IF FormExists('FRINVOICE' )=TRUE THEN INVOICE_CHANGE_VARIABLE;
+     INI_SAVE_INT (FILEPATH_INVOICE,'INVOICE_PRINTER'    ,INVOICE_PRINTER    );
+     INI_SAVE_INT (FILEPATH_INVOICE,'INVOICE_PORT'       ,INVOICE_PORT       );
+     INI_SAVE_STR (FILEPATH_INVOICE,'INVOICE_DELAY'      ,INVOICE_DELAY      );
+     INI_SAVE_STR (FILEPATH_INVOICE,'INVOICE_MAXROW'     ,INVOICE_MAXROW     );
+     INI_SAVE_STR (FILEPATH_INVOICE,'INVOICE_LPTVALUE'   ,INVOICE_LPTVALUE   );
+     INI_SAVE_STR (FILEPATH_INVOICE,'INVOICE_LPTADDR'    ,INVOICE_LPTADDR    );
+     INI_SAVE_INT (FILEPATH_INVOICE,'CASHDRAWER_CASH'    ,CASHDRAWER_CASH    );
+     INI_SAVE_INT (FILEPATH_INVOICE,'CASHDRAWER_PORT'    ,CASHDRAWER_PORT    );
+     INI_SAVE_INT (FILEPATH_INVOICE,'CASHDRAWER_INTTIME' ,CASHDRAWER_INTTIME );
+     END;
+END;
+
+
+PROCEDURE INVOICE_IV_TITLE;
+BEGIN
+  INVOICE_OPEN_PORT;
+  //IF ED_PRINTER.ItemIndex =0 THEN  //测试LPT1
+  //IF (INTTOSTR(INP32(STRTOINTDEF(C_LPTADDR,889))) <> C_LPTVALUE) AND (OUT_PORT = 'LPT1') THEN EXIT;
+  
+  IF TEST_OPEN_FILE(INVOICE_OUT_PORT) = FALSE THEN SHOWMESSAGE('无法打开连接口');
+  
+  IF INVOICE_FIRST_PRINT = FALSE THEN
+     BEGIN
+     INVOICE_FIRST_PRINT := TRUE;
+     IF INVOICE_PRINTER =4 THEN
+        BEGIN
+        INVOICE_IV_CTRL(CHR(27)+'@');
+        INVOICE_IV_CTRL(CHR(27)+'z'+CHR(1));
+        END;
+     END;
+END;
+
+PROCEDURE INVOICE_IV_TEXT(EXPRESSION:STRING);
+VAR STR:STRING;
+BEGIN
+  INVOICE_IV_TITLE;
+  
+  IF INVOICE_PRINTER =0 THEN STR := 'XP1'+ EXPRESSION;
+  IF INVOICE_PRINTER =1 THEN STR := CHR(27)+CHR(82)+CHR(0)+ EXPRESSION;
+  IF INVOICE_PRINTER =2 THEN STR := EXPRESSION;
+  IF INVOICE_PRINTER =3 THEN STR := CHR(27)+CHR(27)+'PB1'+EXPRESSION;
+  IF INVOICE_PRINTER =4 THEN STR := EXPRESSION;
+  
+  //IF ED_PRINTER.ItemIndex =0 THEN  //测试LPT1
+  //IF (INTTOSTR(INP32(STRTOINTDEF(C_LPTADDR,889))) <> C_LPTVALUE) AND (OUT_PORT = 'LPT1') THEN EXIT;
+  COMPORT_OUTLN(INVOICE_OUT_PORT,STR);
+  IF FormExists('FRINVOICE' )=TRUE THEN FRINVOICE.MEMO.Lines.Add( STR );
+END;
+
+PROCEDURE INVOICE_IV_CTRL(EXPRESSION:STRING);
+BEGIN
+  INVOICE_IV_TITLE;
+  //IF ED_PRINTER.ItemIndex =0 THEN  //测试LPT1
+  //IF (INTTOSTR(INP32(STRTOINTDEF(C_LPTADDR,889))) <> C_LPTVALUE) AND (OUT_PORT = 'LPT1') THEN EXIT;
+  
+  COMPORT_OUTLN(INVOICE_OUT_PORT,EXPRESSION);
+  IF FormExists('FRINVOICE' )=TRUE THEN FRINVOICE.MEMO.Lines.Add( EXPRESSION );
+END;
+
+PROCEDURE INVOICE_IV_CTRLX(EXPRESSION:STRING);
+BEGIN
+  INVOICE_IV_TITLE;
+  //IF ED_PRINTER.ItemIndex =0 THEN  //测试LPT1
+  //IF (INTTOSTR(INP32(STRTOINTDEF(C_LPTADDR,889))) <> C_LPTVALUE) AND (OUT_PORT = 'LPT1') THEN EXIT;
+  
+  COMPORT_OUT(INVOICE_OUT_PORT,EXPRESSION);
+  IF FormExists('FRINVOICE' )=TRUE THEN FRINVOICE.MEMO.Lines.Add( EXPRESSION );
+END;
+
+PROCEDURE INVOICE_IV_INV_TEXT(EXPRESSION:STRING);
+BEGIN
+  INC(INVOICE_COUNTER);
+  INVOICE_IV_TEXT(EXPRESSION);
+  IF FormExists('FRINVOICE' )=TRUE THEN FRINVOICE.MEMO.Lines.Add( EXPRESSION );
+
+  IF INVOICE_COUNTER >= STRTOINTDEF(INVOICE_MAXROW,0) THEN  // EPSON
+     BEGIN
+     IF INVOICE_PRINTER = 4 THEN  // EPSON 盖印章
+        BEGIN
+        INVOICE_IV_TEXT('');  INVOICE_IV_TEXT('');
+        INVOICE_IV_TEXT('');  INVOICE_IV_TEXT('');
+        INVOICE_IV_TEXT('');  INVOICE_IV_TEXT('');
+        INVOICE_IV_TEXT('');  INVOICE_IV_TEXT('');
+        INVOICE_IV_TEXT('');  INVOICE_IV_TEXT('');
+        INVOICE_IV_TEXT('');  INVOICE_IV_TEXT('');
+        INVOICE_STAMPING;     //盖印章
+        END;
+  
+     INVOICE_COUNTER := 0;
+     INVOICE_IV_PAGEFEED;
+     END;
+END;
+
+PROCEDURE INVOICE_IV_INV_LINEFEED;
+BEGIN
+  INVOICE_IV_INV_TEXT('');
+END;
+
+PROCEDURE INVOICE_IV_PAGEFEED;  //下一页
+BEGIN
+  IF INVOICE_PRINTER =0 THEN INVOICE_IV_CTRL('XC');
+  IF INVOICE_PRINTER =1 THEN INVOICE_IV_CTRLX(CHR(12));
+  IF INVOICE_PRINTER =2 THEN INVOICE_IV_CTRLX(CHR(12));
+  IF INVOICE_PRINTER =3 THEN INVOICE_IV_CTRL(CHR(27)+CHR(27)+'VB');
+  IF INVOICE_PRINTER =4 THEN INVOICE_IV_CTRL(CHR(12));
+END;
+
+PROCEDURE INVOICE_IV_LEFTLINE_TEXT(EXPRESSION:STRING);
+VAR STR:STRING;
+BEGIN
+  INVOICE_IV_TITLE;
+  IF INVOICE_PRINTER =0 THEN STR := 'XR1'+ EXPRESSION;
+  IF INVOICE_PRINTER =1 THEN STR := CHR(27)+CHR(82)+CHR(0)+ EXPRESSION;
+  IF INVOICE_PRINTER =2 THEN STR := EXPRESSION;
+  IF INVOICE_PRINTER =3 THEN STR := CHR(27)+CHR(27)+'PR1'+EXPRESSION;
+  IF INVOICE_PRINTER =4 THEN STR := CHR(27)+'c0'+CHR(2)+EXPRESSION;
+  COMPORT_OUTLN(INVOICE_OUT_PORT,STR);
+  IF FormExists('FRINVOICE' )=TRUE THEN FRINVOICE.MEMO.Lines.Add( STR );
+END;
+
+PROCEDURE INVOICE_STAMPING;     //盖印章
+BEGIN
+  IF INVOICE_PRINTER =0 THEN INVOICE_IV_CTRL('XG');
+  IF INVOICE_PRINTER =1 THEN INVOICE_IV_CTRL('XG');
+  IF INVOICE_PRINTER =2 THEN INVOICE_IV_CTRL('XG');
+  IF INVOICE_PRINTER =3 THEN INVOICE_IV_CTRL(CHR(27)+CHR(27)+'S');
+  IF INVOICE_PRINTER =4 THEN INVOICE_IV_CTRL(CHR(27)+CHR(111));
+END;
+
+
+PROCEDURE INVOICE_OPEN_CASHBOX; //打开钱箱
+VAR C : TCOMM;
+BEGIN
+  IF CASHDRAWER_CASH = 1 THEN
+     BEGIN
+     IF INVOICE_PRINTER =0 THEN INVOICE_IV_CTRL('XMB');
+     IF INVOICE_PRINTER =1 THEN INVOICE_IV_CTRLX(CHR(28));
+     IF INVOICE_PRINTER =2 THEN INVOICE_IV_CTRLX(CHR(7));
+     IF INVOICE_PRINTER =3 THEN INVOICE_IV_CTRL(CHR(27)+CHR(27)+'G');
+     IF INVOICE_PRINTER =4 THEN INVOICE_IV_CTRLX(CHR(27)+'p0'+CHR(50)+CHR(250));
+     END;
+  IF CASHDRAWER_CASH = 2 THEN
+     BEGIN
+     C          := TCOMM.Create(FRINVOICE);
+     IF CASHDRAWER_PORT = 0 THEN C.CommName := 'COM1';
+     IF CASHDRAWER_PORT = 1 THEN C.CommName := 'COM2';
+     IF CASHDRAWER_PORT = 2 THEN C.CommName := 'COM3';
+     IF CASHDRAWER_PORT = 3 THEN C.CommName := 'COM4';
+     C.StartComm;
+     C.WriteCommData(PCHAR(REPLICATE('0011',CASHDRAWER_INTTIME)),CASHDRAWER_INTTIME);
+     C.WriteCommData(PCHAR(REPLICATE('1100',CASHDRAWER_INTTIME)),CASHDRAWER_INTTIME);
+     C.StopComm;
+     END;
+
+END;
+
+PROCEDURE INVOICE_CUT_PAPER;    //切纸
+BEGIN
+  IF INVOICE_PRINTER =0 THEN INVOICE_IV_CTRL('XF');
+  IF INVOICE_PRINTER =3 THEN INVOICE_IV_CTRL(CHR(27)+CHR(27)+'C');
+  IF INVOICE_PRINTER =4 THEN INVOICE_IV_CTRL(CHR(29)+CHR(86)+chr(66));
+END;
+
+
+procedure TFRINVOICE.FormCreate(Sender: TObject);
+begin
+  INVOICE_COUNTER  := 0;
+  ED_MAXROW.Value  := 20; //最大值
+  INVOICE_OUT_PORT := 'LPT1';
+
+  IF FileExists(FILEPATH_INVOICE) = FALSE THEN
+     BEGIN
+     FILE_CREATE(FILEPATH_INVOICE);
+     INVOICE_WRITE_INI;
+     END ELSE BEGIN
+     INVOICE_READ_INI;
+     END;
+  
+  INVOICE_FIRST_PRINT := FALSE;
+end;
+
+procedure TFRINVOICE.FormShow(Sender: TObject);
+begin
+  CD_PORT.Visible := FALSE;
+  IF CD_CASH.ItemIndex = 2 THEN CD_PORT.Visible := TRUE;
+  PAGE_A.SHOW;
+end;
+
+procedure TFRINVOICE.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FRINVOICE.Release;
+end;
+
+
+procedure TFRINVOICE.BTNQUTClick(Sender: TObject);
+begin
+  INVOICE_WRITE_INI;
+  CLOSE;
+end;
+
+procedure TFRINVOICE.BTNESCClick(Sender: TObject);
+begin
+  CLOSE;
+end;
+
+procedure TFRINVOICE.P_TEST_TEXTClick(Sender: TObject);
+begin
+  INVOICE_IV_TEXT(P_TEXT.Text);
+end;
+
+procedure TFRINVOICE.BitBtn6Click(Sender: TObject);
+begin
+  INVOICE_IV_CTRL(P_CTRL.Text);
+end;
+
+procedure TFRINVOICE.BTN_XFClick(Sender: TObject);
+begin
+  INVOICE_CUT_PAPER;    //切纸
+end;
+
+procedure TFRINVOICE.BTN_XGClick(Sender: TObject);
+begin
+  INVOICE_STAMPING;     //盖印章
+end;
+
+procedure TFRINVOICE.BitBtn4Click(Sender: TObject);
+begin
+  INVOICE_IV_CTRL('XER');
+end;
+
+procedure TFRINVOICE.BTN_XBClick(Sender: TObject);
+begin
+  INVOICE_IV_CTRL('XB');
+end;
+
+procedure TFRINVOICE.BitBtn3Click(Sender: TObject);
+begin
+  INVOICE_IV_CTRL('XC');
+  INVOICE_COUNTER := 0;
+end;
+
+procedure TFRINVOICE.BTN_CASHBOXClick(Sender: TObject);
+begin
+  INVOICE_OPEN_CASHBOX;
+end;
+
+
+procedure TFRINVOICE.BTNCASHBOXTESTClick(Sender: TObject);
+begin
+  IF CASHDRAWER_PORT = 0 THEN COMM2.CommName := 'COM1';
+  IF CASHDRAWER_PORT = 1 THEN COMM2.CommName := 'COM2';
+  IF CASHDRAWER_PORT = 2 THEN COMM2.CommName := 'COM3';
+  IF CASHDRAWER_PORT = 3 THEN COMM2.CommName := 'COM4';
+  Comm2.StartComm;
+  Comm2.WriteCommData(PCHAR(REPLICATE('0011',CD_INTTIME.Value)),CD_INTTIME.Value);
+  DELAY(100);
+  Comm2.WriteCommData(PCHAR(REPLICATE('1100',CD_INTTIME.Value)),CD_INTTIME.Value);
+  Comm2.StopComm;
+  
+  INVOICE_CHANGE_VARIABLE;
+end;
+
+procedure TFRINVOICE.CD_CASHClick(Sender: TObject);
+begin
+  CD_PORT.Visible := FALSE;
+  IF CD_CASH.ItemIndex = 2 THEN CD_PORT.Visible := TRUE;
+  
+  INVOICE_CHANGE_VARIABLE;
+end;
+
+procedure TFRINVOICE.ED_PRINTERClick(Sender: TObject);
+begin
+  INVOICE_FIRST_PRINT := FALSE;
+end;
+
+procedure TFRINVOICE.ED_DELAYChange(Sender: TObject);
+begin
+  INVOICE_CHANGE_VARIABLE;
+end;
+
+procedure TFRINVOICE.ED_PORTClick(Sender: TObject);
+begin
+  INVOICE_CHANGE_VARIABLE;
+end;
+
+
+
+
+end.

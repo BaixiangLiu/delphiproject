@@ -1,0 +1,34 @@
+     FMCCAWD.QCCAW.SQL.CLEAR;
+     FMCCAWD.QCCAW.SQL.ADD('SELECT *  ');
+     FMCCAWD.QCCAW.SQL.ADD('FROM CCAW ');
+     FMCCAWD.QCCAW.SQL.ADD('ORDER BY XXXXXXX ');
+-----------------                -
+-----------------                -
+     FMCCAWD.UCCAW.InsertSQL.CLEAR;
+     FMCCAWD.UCCAW.InsertSQL.Add('INSERT INTO CCAW ');
+     FMCCAWD.UCCAW.InsertSQL.Add(' ( BMENO, CWGET, CWGDS, ) ');
+     FMCCAWD.UCCAW.InsertSQL.Add('VALUES ');
+     FMCCAWD.UCCAW.InsertSQL.Add(' (:BMENO,:CWGET,:CWGDS, ) ');
+                             
+-----------------UPDATE TEXT
+     FMCCAWD.UCCAW.ModifySQL.CLEAR;
+     FMCCAWD.UCCAW.ModifySQL.Add('UPDATE CCAW ');
+     FMCCAWD.UCCAW.ModifySQL.Add('SET ');
+     FMCCAWD.UCCAW.ModifySQL.Add('BMENO = :BMENO ,');
+     FMCCAWD.UCCAW.ModifySQL.Add('CWGET = :CWGET ,');
+     FMCCAWD.UCCAW.ModifySQL.Add('CWGDS = :CWGDS ,');
+
+----------------- EDIT ENABLE
+BMENO.Enabled := TRUE;
+CWGET.Enabled := TRUE;
+CWGDS.Enabled := TRUE;
+
+-----------------
+BMENO.Enabled := FALSE;
+CWGET.Enabled := FALSE;
+CWGDS.Enabled := FALSE;
+
+======================================
+    QCCAWBMENO.VALUE := ''  ;
+    QCCAWCWGET.VALUE := FALSE;
+    QCCAWCWGDS.VALUE := ''  ;

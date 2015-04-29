@@ -1,0 +1,311 @@
+object FMACUS: TFMACUS
+  Left = 171
+  Top = 190
+  Width = 698
+  Height = 224
+  Caption = '流动客户分析资料'
+  Color = 14546175
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -21
+  Font.Name = '宋体'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 21
+  object LBASQA1: TLabel
+    Left = 240
+    Top = 19
+    Width = 55
+    Height = 21
+    Alignment = taRightJustify
+    Caption = '状况1'
+  end
+  object LBASQA2: TLabel
+    Left = 240
+    Top = 54
+    Width = 55
+    Height = 21
+    Alignment = taRightJustify
+    Caption = '状况2'
+  end
+  object LBASQA3: TLabel
+    Left = 240
+    Top = 89
+    Width = 55
+    Height = 21
+    Alignment = taRightJustify
+    Caption = '状况3'
+  end
+  object LBASQA4: TLabel
+    Left = 240
+    Top = 124
+    Width = 55
+    Height = 21
+    Alignment = taRightJustify
+    Caption = '状况4'
+  end
+  object LBASQA5: TLabel
+    Left = 240
+    Top = 159
+    Width = 55
+    Height = 21
+    Alignment = taRightJustify
+    Caption = '状况5'
+  end
+  object LBASQC1: TLabel
+    Left = 5
+    Top = 89
+    Width = 66
+    Height = 21
+    Caption = '星期几'
+  end
+  object LBASQC2: TLabel
+    Left = 5
+    Top = 124
+    Width = 88
+    Height = 21
+    Caption = '同行人数'
+  end
+  object LBBMNAM: TLabel
+    Left = 5
+    Top = 159
+    Width = 88
+    Height = 21
+    Caption = '中文姓名'
+  end
+  object LBBMBTH: TLabel
+    Left = 5
+    Top = 19
+    Width = 88
+    Height = 21
+    Caption = '年　　龄'
+  end
+  object LBBMSEX: TLabel
+    Left = 5
+    Top = 54
+    Width = 88
+    Height = 21
+    Caption = '性　　别'
+  end
+  object Label1: TLabel
+    Left = 150
+    Top = 56
+    Width = 76
+    Height = 16
+    AutoSize = False
+    Caption = '女0  男1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -16
+    Font.Name = '宋体'
+    Font.Style = []
+    ParentFont = False
+  end
+  object BMNAM: TJEdit
+    Left = 100
+    Top = 155
+    Width = 100
+    Height = 29
+    TabOrder = 4
+    OnKeyDown = ASQA1KeyDown
+    Digits = 1
+    Max = 999999999
+    _EditType = EDIT
+    _SHOWCAL = NONE
+  end
+  object BMSEX: TJEdit
+    Left = 100
+    Top = 50
+    Width = 46
+    Height = 29
+    MaxLength = 1
+    TabOrder = 1
+    OnKeyDown = ASQA1KeyDown
+    Digits = 1
+    Max = 999999999
+    _EditType = EDIT
+    _SHOWCAL = NONE
+  end
+  object ASQB1: TCheckBox
+    Left = 510
+    Top = 19
+    Width = 170
+    Height = 20
+    Caption = '是否1'
+    TabOrder = 10
+    OnKeyDown = ASQA1KeyDown
+  end
+  object ASQB2: TCheckBox
+    Left = 510
+    Top = 54
+    Width = 170
+    Height = 20
+    Caption = '是否2'
+    TabOrder = 11
+    OnKeyDown = ASQA1KeyDown
+  end
+  object ASQB3: TCheckBox
+    Left = 510
+    Top = 89
+    Width = 170
+    Height = 20
+    Caption = '是否3'
+    TabOrder = 12
+    OnKeyDown = ASQA1KeyDown
+  end
+  object ASQB4: TCheckBox
+    Left = 510
+    Top = 124
+    Width = 170
+    Height = 20
+    Caption = '是否4'
+    TabOrder = 13
+    OnKeyDown = ASQA1KeyDown
+  end
+  object ASQB5: TCheckBox
+    Left = 510
+    Top = 159
+    Width = 170
+    Height = 20
+    Caption = '是否5'
+    TabOrder = 14
+    OnKeyDown = ASQA1KeyDown
+  end
+  object ASQA1: JLOOKUPBOX
+    Left = 300
+    Top = 15
+    Width = 200
+    Height = 29
+    MaxLength = 20
+    TabOrder = 5
+    OnKeyDown = ASQA1KeyDown
+    _DatabaseName = 'MAIN'
+    _TableName = 'SYSLST'
+    _Field_IDNO = 'LSTID2'
+    _Field_NAME = 'LSTNAM'
+    _Field_KEY1 = 'LSTID1'
+    _Field_KEY2 = 'ACUSASQA1'
+    _EDIT_WIDTH = 40
+    _CHANGE_QUERY = True
+    _INSERT_RECORD = False
+    _SHOW_MESSAGE = False
+  end
+  object ASQA2: JLOOKUPBOX
+    Left = 300
+    Top = 50
+    Width = 200
+    Height = 29
+    MaxLength = 20
+    TabOrder = 6
+    OnKeyDown = ASQA1KeyDown
+    _DatabaseName = 'MAIN'
+    _TableName = 'SYSLST'
+    _Field_IDNO = 'LSTID2'
+    _Field_NAME = 'LSTNAM'
+    _Field_KEY1 = 'LSTID1'
+    _Field_KEY2 = 'ACUSASQA2'
+    _EDIT_WIDTH = 40
+    _CHANGE_QUERY = True
+    _INSERT_RECORD = False
+    _SHOW_MESSAGE = False
+  end
+  object ASQA3: JLOOKUPBOX
+    Left = 300
+    Top = 85
+    Width = 200
+    Height = 29
+    MaxLength = 20
+    TabOrder = 7
+    OnKeyDown = ASQA1KeyDown
+    _DatabaseName = 'MAIN'
+    _TableName = 'SYSLST'
+    _Field_IDNO = 'LSTID2'
+    _Field_NAME = 'LSTNAM'
+    _Field_KEY1 = 'LSTID1'
+    _Field_KEY2 = 'ACUSASQA3'
+    _EDIT_WIDTH = 40
+    _CHANGE_QUERY = True
+    _INSERT_RECORD = False
+    _SHOW_MESSAGE = False
+  end
+  object ASQA4: JLOOKUPBOX
+    Left = 300
+    Top = 120
+    Width = 200
+    Height = 29
+    MaxLength = 20
+    TabOrder = 8
+    OnKeyDown = ASQA1KeyDown
+    _DatabaseName = 'MAIN'
+    _TableName = 'SYSLST'
+    _Field_IDNO = 'LSTID2'
+    _Field_NAME = 'LSTNAM'
+    _Field_KEY1 = 'LSTID1'
+    _Field_KEY2 = 'ACUSASQA4'
+    _EDIT_WIDTH = 40
+    _CHANGE_QUERY = True
+    _INSERT_RECORD = False
+    _SHOW_MESSAGE = False
+  end
+  object ASQA5: JLOOKUPBOX
+    Left = 300
+    Top = 155
+    Width = 200
+    Height = 29
+    MaxLength = 20
+    TabOrder = 9
+    OnKeyDown = ASQA1KeyDown
+    _DatabaseName = 'MAIN'
+    _TableName = 'SYSLST'
+    _Field_IDNO = 'LSTID2'
+    _Field_NAME = 'LSTNAM'
+    _Field_KEY1 = 'LSTID1'
+    _Field_KEY2 = 'ACUSASQA5'
+    _EDIT_WIDTH = 40
+    _CHANGE_QUERY = True
+    _INSERT_RECORD = False
+    _SHOW_MESSAGE = False
+  end
+  object ASQC1: TJEdit
+    Left = 100
+    Top = 85
+    Width = 100
+    Height = 29
+    MaxLength = 1
+    TabOrder = 2
+    OnKeyDown = ASQA1KeyDown
+    Digits = 1
+    Max = 999999999
+    _EditType = INTEGER_EDIT
+    _SHOWCAL = NONE
+  end
+  object ASQC2: TJEdit
+    Left = 100
+    Top = 120
+    Width = 100
+    Height = 29
+    TabOrder = 3
+    OnKeyDown = ASQA1KeyDown
+    Digits = 1
+    Max = 999999999
+    _EditType = INTEGER_EDIT
+    _SHOWCAL = NONE
+  end
+  object BMBTH: TJEdit
+    Left = 100
+    Top = 15
+    Width = 100
+    Height = 29
+    TabOrder = 0
+    OnKeyDown = ASQA1KeyDown
+    Digits = 1
+    Max = 999999999
+    _EditType = INTEGER_EDIT
+    _SHOWCAL = NONE
+  end
+end

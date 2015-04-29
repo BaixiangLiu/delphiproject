@@ -1,0 +1,62 @@
+     FMRGETD.QRGET.SQL.CLEAR;
+     FMRGETD.QRGET.SQL.ADD('SELECT *  ');
+     FMRGETD.QRGET.SQL.ADD('FROM RGET ');
+     FMRGETD.QRGET.SQL.ADD('ORDER BY XXXXXXX ');
+-----------------                -
+-----------------                -
+     FMRGETD.URGET.InsertSQL.CLEAR;
+     FMRGETD.URGET.InsertSQL.Add('INSERT INTO RGET ');
+     FMRGETD.URGET.InsertSQL.Add(' ( RGENO, BGENO, RBPST, RGREA, RGDAT, RGTME, BNENO, RGMRK, RGCNT, RGOUT, ) ');
+     FMRGETD.URGET.InsertSQL.Add('VALUES ');
+     FMRGETD.URGET.InsertSQL.Add(' (:RGENO,:BGENO,:RBPST,:RGREA,:RGDAT,:RGTME,:BNENO,:RGMRK,:RGCNT,:RGOUT, ) ');
+                             
+-----------------UPDATE TEXT
+     FMRGETD.URGET.ModifySQL.CLEAR;
+     FMRGETD.URGET.ModifySQL.Add('UPDATE RGET ');
+     FMRGETD.URGET.ModifySQL.Add('SET ');
+     FMRGETD.URGET.ModifySQL.Add('RGENO = :RGENO ,');
+     FMRGETD.URGET.ModifySQL.Add('BGENO = :BGENO ,');
+     FMRGETD.URGET.ModifySQL.Add('RBPST = :RBPST ,');
+     FMRGETD.URGET.ModifySQL.Add('RGREA = :RGREA ,');
+     FMRGETD.URGET.ModifySQL.Add('RGDAT = :RGDAT ,');
+     FMRGETD.URGET.ModifySQL.Add('RGTME = :RGTME ,');
+     FMRGETD.URGET.ModifySQL.Add('BNENO = :BNENO ,');
+     FMRGETD.URGET.ModifySQL.Add('RGMRK = :RGMRK ,');
+     FMRGETD.URGET.ModifySQL.Add('RGCNT = :RGCNT ,');
+     FMRGETD.URGET.ModifySQL.Add('RGOUT = :RGOUT ,');
+
+----------------- EDIT ENABLE
+RGENO.Enabled := TRUE;
+BGENO.Enabled := TRUE;
+RBPST.Enabled := TRUE;
+RGREA.Enabled := TRUE;
+RGDAT.Enabled := TRUE;
+RGTME.Enabled := TRUE;
+BNENO.Enabled := TRUE;
+RGMRK.Enabled := TRUE;
+RGCNT.Enabled := TRUE;
+RGOUT.Enabled := TRUE;
+
+-----------------
+RGENO.Enabled := FALSE;
+BGENO.Enabled := FALSE;
+RBPST.Enabled := FALSE;
+RGREA.Enabled := FALSE;
+RGDAT.Enabled := FALSE;
+RGTME.Enabled := FALSE;
+BNENO.Enabled := FALSE;
+RGMRK.Enabled := FALSE;
+RGCNT.Enabled := FALSE;
+RGOUT.Enabled := FALSE;
+
+======================================
+    QRGETRGENO.VALUE := ''  ;
+    QRGETBGENO.VALUE := ''  ;
+    QRGETRBPST.VALUE := ''  ;
+    QRGETRGREA.VALUE := ''  ;
+    QRGETRGDAT.VALUE := DATE;
+    QRGETRGTME.VALUE := ''  ;
+    QRGETBNENO.VALUE := ''  ;
+    QRGETRGMRK.VALUE := ''  ;
+    QRGETRGCNT.VALUE := 0   ;
+    QRGETRGOUT.VALUE := FALSE;
